@@ -1,10 +1,7 @@
 class SubmissionsController < ApplicationController
 
     def show
-        # change route to success specific
         @submission = Submission.find(params[:id])
-        session = Stripe::Checkout::Session.retrieve(params[:session_id])
-        @submission.update(status: session.status)
     end
 
     def new
@@ -23,7 +20,7 @@ class SubmissionsController < ApplicationController
     
                 }],
                 mode: 'payment',
-                success_url: "http://localhost:3000/submissions/#{@submission.id}?session_id={CHECKOUT_SESSION_ID}",
+                success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: 'http://localhost:3000/index.html'
     
             })
@@ -32,6 +29,12 @@ class SubmissionsController < ApplicationController
         else
             render :new, alert: @submission.errors.messages
         end
+    end
+
+    def success
+        @submission = Submission.find(params[:submission_id])
+        session = Stripe::Checkout::Session.retrieve(params[:session_id])
+        @submission.update(status: session.status)
     end
 
     private

@@ -1,0 +1,8 @@
+.container
+    .row
+        .col-md-12
+            h4 == "Thank you #{@submission.first_name}!"
+            h5 Winners will be notified via email
+
+            h2 What a cutie!
+            == image_tag @submission.file.variant(:medium) if @submission.file.attached?
