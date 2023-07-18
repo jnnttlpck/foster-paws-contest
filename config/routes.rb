@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :submissions do
     get 'success'
+    get 'cancel'
   end
 end

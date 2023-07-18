@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
                 }],
                 mode: 'payment',
                 success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
-                cancel_url: 'http://localhost:3000/index.html'
+                cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
     
             })
             redirect_to session.url, allow_other_host: true
@@ -35,6 +35,10 @@ class SubmissionsController < ApplicationController
         @submission = Submission.find(params[:submission_id])
         session = Stripe::Checkout::Session.retrieve(params[:session_id])
         @submission.update(status: session.status)
+    end
+
+    def cancel
+        @submission = Submission.find(params[:submission_id])
     end
 
     private
