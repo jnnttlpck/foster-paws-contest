@@ -5,4 +5,9 @@ class Submission < ApplicationRecord
 
     validates :email, presence: true
 
+    enum status: {
+        open: 0,
+        complete: 1,
+        expired: 2
+    }
 end

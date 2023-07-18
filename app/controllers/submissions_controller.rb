@@ -1,7 +1,10 @@
 class SubmissionsController < ApplicationController
 
     def show
+        # change route to success specific
         @submission = Submission.find(params[:id])
+        session = Stripe::Checkout::Session.retrieve(params[:session_id])
+        @submission.update(status: session.status)
     end
 
     def new
@@ -10,7 +13,7 @@ class SubmissionsController < ApplicationController
 
     def create
         @submission = Submission.new(submission_params)
-        # @submission.file.attach(params[:file])
+        @submission.status = :open
 
         if @submission.save!
             session = Stripe::Checkout::Session.create({
@@ -20,7 +23,7 @@ class SubmissionsController < ApplicationController
     
                 }],
                 mode: 'payment',
-                success_url: "http://localhost:3000/submissions/#{@submission.id}",
+                success_url: "http://localhost:3000/submissions/#{@submission.id}?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: 'http://localhost:3000/index.html'
     
             })
