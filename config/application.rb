@@ -21,7 +21,7 @@ module FosterPawsContest
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'stripe_keys.yml')
       YAML.load(File.open(env_file))[Rails.env].each do |key, value|
-        ENV[key.to_s] = value
+        ENV[key.to_s.upcase] = value
       end if File.exists?(env_file)
     end
   end
