@@ -12,5 +12,5 @@
         tr
             th Pet Name
             td == @submission.pet_name
-    == image_tag @submission.file.variant(:medium)
+    == image_tag @submission.file.variant(:medium) if @submission.file.attached?
         
