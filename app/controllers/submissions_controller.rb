@@ -15,7 +15,7 @@ class SubmissionsController < ApplicationController
         if @submission.save!
             session = Stripe::Checkout::Session.create({
                 line_items: [{
-                    price: 'price_1NV19wCwjzVCdpYN6O6hk8Hn',
+                    price: Product.find_by(name: 'Submission').stripe_price_key,
                     quantity: 1,
     
                 }],
