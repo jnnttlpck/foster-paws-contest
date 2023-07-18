@@ -12,5 +12,9 @@
         tr
             th Pet Name
             td == @submission.pet_name
+    h5 How did your cat come into your life?
+    p == simple_format(@submission.got_cat)
+    h5 More about
+    p == simple_format(@submission.about)
     == image_tag @submission.file.variant(:medium) if @submission.file.attached?
         

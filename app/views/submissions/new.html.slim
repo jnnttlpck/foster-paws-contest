@@ -17,6 +17,12 @@
             = f.label :pet_name
             = f.text_field :pet_name, class: 'form-control'
         .form-group
+            = f.label :got_cat, 'How did you cat come into your life?'
+            = f.text_area :got_cat, class: 'form-control'
+        .form-group
+            = f.label :about, 'Tell us more about your cat!'
+            = f.text_area :about, class: 'form-control'
+        .form-group
             = f.file_field :file
         = f.submit
         
