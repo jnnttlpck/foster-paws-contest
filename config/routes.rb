@@ -5,4 +5,8 @@ Rails.application.routes.draw do
     get 'success'
     get 'cancel'
   end
+  resources :orders do
+    get 'success'
+    get 'cancel'
+  end
 end

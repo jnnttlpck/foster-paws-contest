@@ -24,5 +24,12 @@
             = f.text_area :about, class: 'form-control'
         .form-group
             = f.file_field :file
+        .form-group
+            = f.label :preorder_calendar do 
+                = f.check_box :pre_order_calendar
+                | Preorder Calander?
+            = f.label :pre_order_quantity
+            = f.number_field :pre_order_quantity, value: 1
+
         = f.submit
         

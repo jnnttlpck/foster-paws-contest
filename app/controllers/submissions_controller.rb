@@ -12,20 +12,24 @@ class SubmissionsController < ApplicationController
         @submission = Submission.new(submission_params)
         @submission.status = :open
 
+        line_items = [{
+            price: Product.find_by(name: 'Submission').stripe_price_key,
+            quantity: 1,
+        }]
+        line_items << {
+            price: Product.find_by(name: 'Calendar').stripe_price_key,
+            quantity: submission_params[:pre_order_quantity].to_i
+        } if submission_params[:pre_order_calendar]
+
         if @submission.save!
             session = Stripe::Checkout::Session.create({
-                line_items: [{
-                    price: Product.find_by(name: 'Submission').stripe_price_key,
-                    quantity: 1,
-    
-                }],
+                line_items: line_items,
                 mode: 'payment',
                 success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
     
             })
-            redirect_to session.url, allow_other_host: true
-            # redirect_to @submission, notice: 'Thank you!'
+            redirect_to session.url, status: 303, allow_other_host: true
         else
             render :new, alert: @submission.errors.messages
         end
@@ -44,6 +48,6 @@ class SubmissionsController < ApplicationController
     private
 
     def submission_params
-        params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :file)
+        params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :pre_order_calendar, :pre_order_quantity, :file)
     end
 end
