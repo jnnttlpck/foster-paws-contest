@@ -7,12 +7,13 @@ class OrdersController < ApplicationController
     def create
         @order = Order.create(order_params)
         @order.status = :open
+        line_items = @order.line_items.map do |li|
+            price = li.cover_transaction_fee? ? li.price.product.prices.find_by(transaction_fee: true) : li.price
+            { price: price.stripe_key, quantity: li.quantity }
+        end
         if @order.save!
             session = Stripe::Checkout::Session.create({
-                line_items: [{
-                    price: @order.product.stripe_price_key,
-                    quantity: @order.quantity
-                }],
+                line_items: line_items,
                 mode: 'payment',
                 success_url: "http://localhost:3000/orders/#{@order.id}/success?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: "http://localhost:3000/orders/#{@order.id}/cancel"
@@ -35,7 +36,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.require(:order).permit(:quantity, :product_id, :email)
+        params.require(:order).permit(:email, line_items_attributes: [:id, :quantity, :price_id, :cover_transaction_fee])
     end
 
 end

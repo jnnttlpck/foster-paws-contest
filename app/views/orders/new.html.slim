@@ -1,10 +1,25 @@
 = form_with model: @order, data: { turbo: false } do |f|
-    = f.hidden_field :product_id, value: @product.id
-    .form-group 
-        = f.label :quantity
-        = f.number_field :quantity
     .form-group 
         = f.label :email
         = f.text_field :email
+        - Product.where.not(name: 'submission').all.each do |product|
+            div
+                / TODO: make this more user-friendly looking
+                == f.fields_for :line_items, @order.line_items.build do |ff|
+                    == ff.hidden_field :price_id, value: ff.object.id
+                    h4 == product.name.titleize
+                    - base_price = product.prices.find_by(transaction_fee: false)
+                    - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
+                    h5 == "$#{sprintf('%.2f', stripe_price.to_f/100)}"
+                    == ff.label :quantity
+                    = ff.number_field :quantity
+                    = ff.label :cover_transaction_fee do 
+                        = ff.check_box :cover_transaction_fee
+                        - transaction_price = product.prices.find_by(transaction_fee: true)
+                        - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
+                        - difference = stripe_transaction_price - stripe_price
+                        - stripe_price = sprintf('%.2f', difference.to_f/100)
+                        
+                        == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
     .form-group
         = f.submit 'Order', class: 'btn btn-success'

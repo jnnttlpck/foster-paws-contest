@@ -1,10 +1,11 @@
 class Order < ApplicationRecord
-  # consider allowing > 1 product for the future just in case?
-  belongs_to :product
+  has_many :line_items, dependent: :destroy
 
   enum status: {
     open: 0,
     complete: 1,
     expired: 2
 }
+
+accepts_nested_attributes_for :line_items, reject_if: proc { |attrs| attrs[:quantity].blank? }
 end
