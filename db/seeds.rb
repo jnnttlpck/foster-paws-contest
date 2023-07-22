@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+20.times do
+    Submission.create!(
+        [
+            { 
+                first_name: Faker::Name.first_name,
+                last_name: Faker::Name.last_name,
+                email: Faker::Internet.email,
+                pet_name: Faker::Creature::Cat.name,
+                location: Faker::Address.city,
+                got_cat: Faker::Lorem.paragraph,
+                about: Faker::Lorem.paragraph,
+                status: :complete
+            }
+        ]
+    )
+
+end
+Submission.all.each do |submission|
+    url = Faker::LoremFlickr.image(search_terms: ['cat', 'kitten'])
+    filename = 'cat.jpg'
+    file = URI.open(url)
+    submission.file.attach(io: file, filename: filename)
+end
