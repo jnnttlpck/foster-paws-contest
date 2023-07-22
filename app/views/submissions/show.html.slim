@@ -1,11 +1,12 @@
 .container
     table.table-responsive
-        tr
-            th Name
-            td == [@submission.first_name, @submission.last_name].join(' ')
-        tr
-            th Email
-            td == @submission.email
+        - if current_user
+            tr
+                th Name
+                td == [@submission.first_name, @submission.last_name].join(' ')
+            tr
+                th Email
+                td == @submission.email
         tr
             th Location
             td == @submission.location
