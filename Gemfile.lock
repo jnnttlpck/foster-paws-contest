@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/thomaspark/bootswatch.git
+  revision: b2e1135391497f6b183fdb08200a5955b9b0240f
+  specs:
+    bootswatch (5.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -262,6 +268,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3.0.alpha3)
+  bootswatch!
   capybara
   debug
   devise (~> 4.9)

@@ -1,5 +1,9 @@
 class SubmissionsController < ApplicationController
 
+    def index
+        @submissions = Submission.where(status: :complete)
+    end
+
     def show
         @submission = Submission.find(params[:id])
     end
@@ -26,7 +30,7 @@ class SubmissionsController < ApplicationController
             price: submission_price.stripe_key,
             quantity: 1
         }
-        if @submission.save!
+        if @submission.save
             session = Stripe::Checkout::Session.create({
                 line_items: line_items.flatten,
                 mode: 'payment',
@@ -44,6 +48,7 @@ class SubmissionsController < ApplicationController
         @submission = Submission.find(params[:submission_id])
         session = Stripe::Checkout::Session.retrieve(params[:session_id])
         @submission.update(status: session.status)
+        @submission.order.update(status: session.status) if @submission.order
     end
 
     def cancel

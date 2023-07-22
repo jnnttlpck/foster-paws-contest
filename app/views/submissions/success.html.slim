@@ -3,6 +3,7 @@
         .col-md-12
             h4 == "Thank you #{@submission.first_name}!"
             h5 Winners will be notified via email
+            == link_to 'See all submissions', submissions_path, class: 'btn btn-primary'
 
             h2 What a cutie!
             == image_tag @submission.file.variant(:medium) if @submission.file.attached?

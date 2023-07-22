@@ -1,0 +1,22 @@
+
+.submission-card {
+    border: 2px lightgray solid;
+    border-radius: 5%;
+    max-width: 300px;
+    max-height: 500px;
+    overflow: hidden;
+
+    .image {
+        height: auto;
+    }
+
+    .info {
+        padding: 2rem;
+        .about {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+}
