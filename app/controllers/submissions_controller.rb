@@ -27,7 +27,6 @@ class SubmissionsController < ApplicationController
             quantity: 1
         }
         if @submission.save!
-            debugger
             session = Stripe::Checkout::Session.create({
                 line_items: line_items.flatten,
                 mode: 'payment',
