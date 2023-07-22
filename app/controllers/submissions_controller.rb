@@ -1,4 +1,7 @@
 class SubmissionsController < ApplicationController
+    before_action lambda {
+        resize_image_before_upload(submission_params[:file], 800, 800)
+    }, only: [:create]
 
     def index
         @submissions = Submission.where(status: :complete)
@@ -66,5 +69,20 @@ class SubmissionsController < ApplicationController
         params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file,
             order_attributes: [:id, line_items_attributes: [:quantity, :price_id, :cover_transaction_fee]]
         )
+    end
+
+    def resize_image_before_upload(image_param, width, height)
+        return unless image_param
+
+        begin
+          ImageProcessing::MiniMagick
+            .source(image_param)
+            .resize_to_fit(width, height)
+            .call(destination: image_param.tempfile.path)
+        rescue StandardError => e
+
+        end
+        
+
     end
 end
