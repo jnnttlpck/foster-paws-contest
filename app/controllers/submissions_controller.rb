@@ -11,19 +11,25 @@ class SubmissionsController < ApplicationController
     def create
         @submission = Submission.new(submission_params)
         @submission.status = :open
+        line_items = []
+        if (@order = @submission.order)
+            @submission.order.status = :open
 
-        line_items = [{
-            price: Product.find_by(name: 'Submission').stripe_price_key,
-            quantity: 1,
-        }]
+            line_items << @order.line_items.map do |li|
+                price = li.cover_transaction_fee? ? li.price.product.prices.find_by(transaction_fee: true) : li.price
+                { price: price.stripe_key, quantity: li.quantity }
+            end
+        end
+        submission_product = Product.find_by(name: 'submission')
+        submission_price = @submission.cover_transaction_fee? ? submission_product.prices.find_by(transaction_fee: true) : submission_product.prices.find_by(transaction_fee: false)
         line_items << {
-            price: Product.find_by(name: 'Calendar').stripe_price_key,
-            quantity: submission_params[:pre_order_quantity].to_i
-        } if submission_params[:pre_order_calendar]
-
+            price: submission_price.stripe_key,
+            quantity: 1
+        }
         if @submission.save!
+            debugger
             session = Stripe::Checkout::Session.create({
-                line_items: line_items,
+                line_items: line_items.flatten,
                 mode: 'payment',
                 success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
@@ -45,9 +51,16 @@ class SubmissionsController < ApplicationController
         @submission = Submission.find(params[:submission_id])
     end
 
+    def add_order
+        @submission = Submission.new
+        @order = Order.new
+    end
+
     private
 
     def submission_params
-        params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :pre_order_calendar, :pre_order_quantity, :file)
+        params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file,
+            order_attributes: [:id, line_items_attributes: [:quantity, :price_id, :cover_transaction_fee]]
+        )
     end
 end

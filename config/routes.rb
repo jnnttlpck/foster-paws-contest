@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :submissions do
     get 'success'
     get 'cancel'
+    get 'add_order', on: :collection
   end
   resources :orders do
     get 'success'

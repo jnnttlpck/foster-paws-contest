@@ -1,35 +1,40 @@
-.container
-    h4 Enter your kitty!
-    = form_with model: @submission, data: { turbo: false } do |f|
-        .form-group
-            = f.label :first_name
-            = f.text_field :first_name, class: 'form-control'
-        .form-group 
-            = f.label :last_name
-            = f.text_field :last_name, class: 'form-control'
-        .form-group
-            = f.label :email
-            = f.text_field :email, required: true, class: 'form-control'
-        .form-group
-            = f.label :location
-            = f.text_field :location, class: 'form-control'
-        .form-group 
-            = f.label :pet_name
-            = f.text_field :pet_name, class: 'form-control'
-        .form-group
-            = f.label :got_cat, 'How did you cat come into your life?'
-            = f.text_area :got_cat, class: 'form-control'
-        .form-group
-            = f.label :about, 'Tell us more about your cat!'
-            = f.text_area :about, class: 'form-control'
-        .form-group
-            = f.file_field :file
-        .form-group
-            = f.label :preorder_calendar do 
-                = f.check_box :pre_order_calendar
-                | Preorder Calander?
-            = f.label :pre_order_quantity
-            = f.number_field :pre_order_quantity, value: 1
-
-        = f.submit
-        
+.container.flex-row.
+    .row
+        .col-md-12
+            .lg-bottom-margin
+                h2 Enter your kitty!
+                h5 
+                    p Donate $5 to submit.
+                    p Winners will be included in our (next year) calendar and receive a free calendar! 
+                    p Winners will be notified via email
+    .row
+        .col-md-6
+            = form_with model: @submission, data: { turbo: false } do |f|
+                .form-group
+                    = f.label :first_name
+                    = f.text_field :first_name, class: 'form-control'
+                .form-group 
+                    = f.label :last_name
+                    = f.text_field :last_name, class: 'form-control'
+                .form-group
+                    = f.label :email
+                    = f.text_field :email, required: true, class: 'form-control'
+                .form-group
+                    = f.label :location
+                    = f.text_field :location, class: 'form-control'
+                .form-group 
+                    = f.label :pet_name, 'Cat Name'
+                    = f.text_field :pet_name, class: 'form-control'
+                .form-group
+                    = f.label :got_cat, 'How did you cat come into your life?'
+                    = f.text_area :got_cat, class: 'form-control'
+                .form-group
+                    = f.label :about, 'Tell us more about your cat!'
+                    = f.text_area :about, class: 'form-control'
+                .form-group
+                    = f.file_field :file
+                .form-group data-controller='orders'
+                    == link_to 'Pre-order Calendar', add_order_submissions_path, class: 'btn btn-primary', data: { action: 'orders#addOrder' }
+                #order
+                = f.submit 'Submit & Donate', class: 'btn btn-primary'
+                

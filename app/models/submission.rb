@@ -1,4 +1,5 @@
 class Submission < ApplicationRecord
+    has_one :order
     has_one_attached :file do |attachable|
         attachable.variant :medium, resize_to_limit: [800, 800]
     end
@@ -10,4 +11,6 @@ class Submission < ApplicationRecord
         complete: 1,
         expired: 2
     }
+
+    accepts_nested_attributes_for :order
 end
