@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
             })
             redirect_to session.url, status: 303, allow_other_host: true
         else 
-            render :new, status: :unprocessible_entity
+            render :new, status: :unprocessable_entity
         end
     end
 

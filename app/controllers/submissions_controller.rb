@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
         line_items = []
         if (@order = @submission.order)
             @submission.order.status = :open
-
+            @submission.order.email = @submission.email
             line_items << @order.line_items.map do |li|
                 price = li.cover_transaction_fee? ? li.price.product.prices.find_by(transaction_fee: true) : li.price
                 { price: price.stripe_key, quantity: li.quantity }
@@ -43,7 +43,8 @@ class SubmissionsController < ApplicationController
             })
             redirect_to session.url, status: 303, allow_other_host: true
         else
-            render :new, alert: @submission.errors.messages
+            flash[:alert] = @submission.errors.full_messages.join(' ')
+            render :new, status: :unprocessable_entity
         end
     end
 

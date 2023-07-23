@@ -1,7 +1,7 @@
 = form_with model: @order, data: { turbo: false } do |f|
     .form-group 
         = f.label :email
-        = f.text_field :email
+        = f.text_field :email, required: true
         == render partial: 'form'
 
     .form-group
