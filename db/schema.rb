@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_153739) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_23_172230) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -89,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_153739) do
     t.boolean "pre_order_calendar", default: false
     t.integer "pre_order_quantity"
     t.boolean "cover_transaction_fee", default: false
+    t.integer "year"
   end
 
   create_table "users", force: :cascade do |t|

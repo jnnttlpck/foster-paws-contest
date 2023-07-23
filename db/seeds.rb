@@ -15,8 +15,9 @@
                 pet_name: Faker::Creature::Cat.name,
                 location: Faker::Address.city,
                 got_cat: Faker::Lorem.paragraph(sentence_count: 10),
-                about: Faker::Lorem.paragraphs(number: 2),
-                status: :complete
+                about: Faker::Lorem.paragraph(sentence_count: 20),
+                status: :complete,
+                year: 1.year.from_now.year
             }
         ]
     )
