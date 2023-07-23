@@ -1,6 +1,45 @@
 body {
+    // rmv from home page
     background: rgb(248,248,250);
     background: linear-gradient(142deg, rgba(248,248,250,1) 40%, rgba(89,49,150,1) 100%); 
     background-size: cover;
     min-height: 100vh;
 }
+
+.home-page-imgs {
+
+    img {
+        height: 50%;
+        width: auto;
+    }
+    .background-img {
+        position: absolute;
+        // left: 200px;
+        z-index: -1;
+        height: inherit;
+        width: inherit;
+    }
+    
+    .foreground-img {
+        // position: absolute;
+        height: 400px;
+        width: auto;
+    }
+}
+
+.home-page-graphic {
+    height: 400px;
+    width: auto;
+}
+
+.right-side { 
+    padding: 3rem;
+}
+.foster-paws-box {
+    border-radius: 10%;
+    background-color: lightblue;
+    padding: 3rem;
+    margin: 1rem;
+}
+
+

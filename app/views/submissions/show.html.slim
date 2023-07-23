@@ -1,21 +1,23 @@
-.container
-    table.table-responsive
-        - if current_user
-            tr
-                th Name
-                td == [@submission.first_name, @submission.last_name].join(' ')
-            tr
-                th Email
-                td == @submission.email
-        tr
-            th Location
-            td == @submission.location
-        tr
-            th Pet Name
-            td == @submission.pet_name
-    h5 How did your cat come into your life?
-    p == simple_format(@submission.got_cat)
-    h5 More about
-    p == simple_format(@submission.about)
-    == image_tag @submission.file.variant(:medium) if @submission.file.attached?
+.container.lg-top-margin
+    .row
+        .col-md-4
+            .flex-row.space-between.align-top
+
+                .info
+                    h3 == @submission.pet_name
+                    - if current_user
+                        h5 Submitted by
+                        == [@submission.first_name, @submission.last_name].join(' ')
+                        == @submission.email
+                    h4 == @submission.location
+                == link_to submissions_path, class: 'btn btn-primary' do
+                    == fa_icon('arrow-left', class: 'xs-right-margin')
+                    | Back to All
+            hr
+            h5 How did your cat come into your life?
+            p == simple_format(@submission.got_cat)
+            h5 More about
+            p == simple_format(@submission.about)
+        .col-md-8
+            == image_tag @submission.file.variant(:medium) if @submission.file.attached?
         

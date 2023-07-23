@@ -1,17 +1,26 @@
 .container.xl-top-margin.flex-column.align-center
-    h1.lg-bottom-margin Welcome to the Cutest Cat of the Upstate Contest! 
-    h3 Presented by Foster Paws
-    == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'lg-bottom-margin'
-    h4.text-primary Enter your cutest cat pic! Winners will be featured in the Foster Paws 2024 calendar.
-    / h5 
-    /     span.badge.bg-info == "#{Submission.all.size} cuties have entered!"
-    .flex-row.md-gap.lg-top-margin
-        == link_to new_submission_path, class: 'btn btn-primary' do 
-            == fa_icon 'cat', class: 'xs-right-margin'
-            | Submit your kitty
-        == link_to new_order_path, class: 'btn btn-secondary' do 
-            == fa_icon 'calendar-days', class: 'xs-right-margin'
-            | Pre-Order Calendar
+    .display-1.xl-bottom-margin.text-center Welcome to the Cutest Cat of the Upstate Contest!
+    .flex-row.justify-center.space-around.no-wrap.md-gap
+        == image_tag('catandSC.png', class: 'img-responsive home-page-graphic')
+            / == image_tag('SC1.png', class: 'img-responsive background-img')
+            / == image_tag('cat1.png', class: 'img-responsive foreground-img')
 
+        .right-side
+            h1.text-primary Enter your cutest cat pic! 
+            h5.text-primary Winners will be featured in the Foster Paws 2024 calendar.
+            h5.text-primary All submissions benefit Foster Paws Rescue
+            / h5 
+            /     span.badge.bg-info == "#{Submission.all.size} cuties have entered!"
+            .flex-row.md-gap.lg-top-margin
+                == link_to new_submission_path, class: 'btn btn-primary btn-lg' do
+                    == fa_icon 'plus', class: 'xs-right-margin'
+                    == fa_icon 'cat', class: 'xs-right-margin'
+                    | Submit your kitty
+                == link_to new_order_path, class: 'btn btn-secondary btn-lg' do 
+                    == fa_icon 'calendar-days', class: 'xs-right-margin'
+                    | Pre-Order Calendar
+    .foster-paws-box
+        h3 Presented by Foster Paws
+        == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'lg-bottom-margin'
 / add to footer
 / <a href="https://www.freepik.com/free-vector/coloured-cats-collection_1072063.htm#query=cat&position=6&from_view=search&track=sph">Image by terdpongvector</a> on Freepik

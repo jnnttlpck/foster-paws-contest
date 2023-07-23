@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     end
 
     def create
-        @order = Order.create(order_params)
+        @order = Order.new(order_params)
         @order.status = :open
         line_items = @order.line_items.map do |li|
             price = li.cover_transaction_fee? ? li.price.product.prices.find_by(transaction_fee: true) : li.price

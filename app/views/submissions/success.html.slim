@@ -6,4 +6,4 @@
             == link_to 'See all submissions', submissions_path, class: 'btn btn-primary'
 
             h2 What a cutie!
-            == image_tag @submission.file.variant(:medium) if @submission.file.attached?
+            == image_tag @submission.file.variant(:small) if @submission.file.attached?

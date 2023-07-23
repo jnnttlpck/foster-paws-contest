@@ -1,8 +1,35 @@
+.submission-card {
+    border: 2px lightgray solid;
+    border-radius: 5%;
+    max-width: 300px;
+    max-height: 600px;
+    overflow: hidden;
+    background-color: white;
 
+    .image {
+        height: auto;
+    }
 
-.card {
-    width: 18rem;
+    .info {
+        padding: 2rem;
+        .about {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
 }
+
+// .card {
+//     width: 18rem;
+//     height: 600px;
+// }
+
+// .card-text{
+//     overflow: hidden;
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+// }
 
 .id-number {
     position: absolute;

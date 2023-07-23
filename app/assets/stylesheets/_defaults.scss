@@ -32,6 +32,9 @@
     flex-direction: column;
 }
 
+.no-wrap {
+    flex-wrap: nowrap;
+}
 .md-gap {
     gap: 2rem;
 }
@@ -54,4 +57,12 @@
 
 .space-between {
     justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.full-width {
+    width: 100vw;
 }
