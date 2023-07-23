@@ -7,13 +7,15 @@
             h4 == product.name.titleize
             - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
             h5 == "$#{sprintf('%.2f', stripe_price.to_f/100)}"
-            == ff.label :quantity
-            = ff.number_field :quantity
-            = ff.label :cover_transaction_fee do 
-                = ff.check_box :cover_transaction_fee
-                - transaction_price = product.prices.find_by(transaction_fee: true)
-                - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
-                - difference = stripe_transaction_price - stripe_price
-                - stripe_price = sprintf('%.2f', difference.to_f/100)
-                
-                == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
+            .form-group.col-md-3
+                == ff.label :quantity
+                = ff.number_field :quantity, min: 1, class: 'form-control'
+            .form-check
+                = ff.label :cover_transaction_fee, class: 'sm-bottom-margin form-check-label' do 
+                    = ff.check_box :cover_transaction_fee, class: 'form-check-input'
+                    - transaction_price = product.prices.find_by(transaction_fee: true)
+                    - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
+                    - difference = stripe_transaction_price - stripe_price
+                    - stripe_price = sprintf('%.2f', difference.to_f/100)
+                    
+                    == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"

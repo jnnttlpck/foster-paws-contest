@@ -14,8 +14,8 @@
                 email: Faker::Internet.email,
                 pet_name: Faker::Creature::Cat.name,
                 location: Faker::Address.city,
-                got_cat: Faker::Lorem.paragraph,
-                about: Faker::Lorem.paragraph,
+                got_cat: Faker::Lorem.paragraph(sentence_count: 10),
+                about: Faker::Lorem.paragraphs(number: 2),
                 status: :complete
             }
         ]

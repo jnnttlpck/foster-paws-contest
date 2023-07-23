@@ -1,4 +1,17 @@
-.container
-    h4 Hello World
-    == link_to 'Submit your kitty!', new_submission_path, class: 'btn btn-primary'
-    == link_to 'Pre-Order Calendar', new_order_path, class: 'btn btn-secondary'
+.container.xl-top-margin.flex-column.align-center
+    h1.lg-bottom-margin Welcome to the Cutest Cat of the Upstate Contest! 
+    h3 Presented by Foster Paws
+    == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'lg-bottom-margin'
+    h4.text-primary Enter your cutest cat pic! Winners will be featured in the Foster Paws 2024 calendar.
+    / h5 
+    /     span.badge.bg-info == "#{Submission.all.size} cuties have entered!"
+    .flex-row.md-gap.lg-top-margin
+        == link_to new_submission_path, class: 'btn btn-primary' do 
+            == fa_icon 'cat', class: 'xs-right-margin'
+            | Submit your kitty
+        == link_to new_order_path, class: 'btn btn-secondary' do 
+            == fa_icon 'calendar-days', class: 'xs-right-margin'
+            | Pre-Order Calendar
+
+/ add to footer
+/ <a href="https://www.freepik.com/free-vector/coloured-cats-collection_1072063.htm#query=cat&position=6&from_view=search&track=sph">Image by terdpongvector</a> on Freepik

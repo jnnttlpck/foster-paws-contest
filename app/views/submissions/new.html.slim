@@ -1,51 +1,57 @@
-.container.flex-row.
+.container.xl-top-margin.xl-bottom-margin
     .row
-        .col-md-12
+        .col-md-6.col-sm-12
             .lg-bottom-margin
                 h2 Enter your kitty!
-                h5 
-                    p Donate $5 to submit.
-                    p Winners will be included in our (next year) calendar and receive a free calendar! 
-                    p Winners will be notified via email
-    .row
-        .col-md-6
+                h6 Winners will be featured in our 2023 Calendar
+                p 
+                    | Entry includes a 
+                    strong$5 donation 
+                    | to Foster Paws
+                em Winners will be notified via email
+    
+        .col-md-6.col-sm-12
             = form_with model: @submission, data: { turbo: false } do |f|
-                .form-group
+                .form-group.form-floating
+                    = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
                     = f.label :first_name
-                    = f.text_field :first_name, class: 'form-control'
-                .form-group 
+                .form-group.form-floating
+                    = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
                     = f.label :last_name
-                    = f.text_field :last_name, class: 'form-control'
-                .form-group
+                .form-group.form-floating
+                    = f.text_field :email, required: true, class: 'form-control', placeholder: 'Email'
                     = f.label :email
-                    = f.text_field :email, required: true, class: 'form-control'
-                .form-group
+                .form-group.form-floating
+                    = f.text_field :location, class: 'form-control', placeholder: 'Location'
                     = f.label :location
-                    = f.text_field :location, class: 'form-control'
-                .form-group 
+                .form-group.form-floating
+                    = f.text_field :pet_name, class: 'form-control', placeholder: 'Cat Name'
                     = f.label :pet_name, 'Cat Name'
-                    = f.text_field :pet_name, class: 'form-control'
-                .form-group
+                .form-group.form-floating
+                    = f.text_area :got_cat, class: 'form-control', placeholder: 'How did you cat come into your life?', style: "height: 100px;"
                     = f.label :got_cat, 'How did you cat come into your life?'
-                    = f.text_area :got_cat, class: 'form-control'
-                .form-group
+                .form-group.form-floating
+                    = f.text_area :about, class: 'form-control md-text-area', placeholder: 'Tell us more about your cat!', style: "height: 100px;"
                     = f.label :about, 'Tell us more about your cat!'
-                    = f.text_area :about, class: 'form-control'
-                .form-group
-                    = f.file_field :file
-                = f.label :cover_transaction_fee do 
+                .form-group.lg-bottom-margin
+                    = f.label :file, 'Upload Pic', class: 'form-label'
+                    = f.file_field :file, class: 'form-control'
+                .form-check
+                    = f.label :cover_transaction_fee, class: 'sm-bottom-margin form-check-label' do 
 
-                    = f.check_box :cover_transaction_fee
-                    - submission_product = Product.find_by(name: 'submission')
-                    - base_price = submission_product.prices.find_by(transaction_fee: false)
-                    - transaction_price = submission_product.prices.find_by(transaction_fee: true)
-                    - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
-                    - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
-                    - difference = stripe_transaction_price - stripe_price
-                    - stripe_price = sprintf('%.2f', difference.to_f/100)
-                    == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
+                        => f.check_box :cover_transaction_fee, class: 'form-check-input'
+                        - submission_product = Product.find_by(name: 'submission')
+                        - base_price = submission_product.prices.find_by(transaction_fee: false)
+                        - transaction_price = submission_product.prices.find_by(transaction_fee: true)
+                        - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
+                        - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
+                        - difference = stripe_transaction_price - stripe_price
+                        - stripe_price = sprintf('%.2f', difference.to_f/100)
+                        == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
                 .form-group data-controller='orders'
-                    == link_to 'Pre-order Calendar', add_order_submissions_path, class: 'btn btn-primary', data: { action: 'orders#addOrder' }
+                    == link_to  add_order_submissions_path, class: 'btn btn-secondary', data: { action: 'orders#addOrder' } do 
+                        == fa_icon 'plus', class: 'xs-right-margin'
+                        | Add Calendar Pre-Order
                 #order
                 = f.submit 'Submit & Donate', class: 'btn btn-primary'
                 

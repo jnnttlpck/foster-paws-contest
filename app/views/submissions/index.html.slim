@@ -1,16 +1,17 @@
-.container 
+.container.lg-top-margin
     .row
         .col-md-12
             .flex-row.md-gap
                 - @submissions.each do |submission|
-                    .submission-card
-                        = image_tag submission.file.variant(:small), class: 'image' if submission.file.attached?
+                    - cache(submission) do
+                        .card.rounded-2
+                            span.badge.text-bg-info.rounded-pill.id-number == submission.id
+                            = image_tag submission.file.variant(:small), class: 'card-img-top rounded-top-2' if submission.file.attached?
 
-                        .info
-                            h4 = submission.pet_name
-                            p = submission.location
-                            h5 About
-                            p.about
-                                = submission.about
-                                = submission.got_cat
-                            == link_to 'Read more', submission_path(submission)
+                            .card-body
+                                h4.card-title = submission.pet_name
+                                p.card-text.text-secondary = submission.location
+                                p.card-text.text-truncated = submission.about
+                                p.card-text.text-truncated = submission.got_cat
+                            .card-footer
+                                == link_to 'Read more', submission_path(submission)

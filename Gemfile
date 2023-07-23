@@ -51,6 +51,8 @@ gem "image_processing", "~> 1.2"
 gem 'bootstrap', '~> 5.3.0.alpha3'
 gem "bootswatch", github: "thomaspark/bootswatch"
 gem 'faker'
+gem "font-awesome-rails"
+gem 'jquery-rails'
 gem 'mini_magick'
 gem 'mini_racer'
 gem 'stripe'
