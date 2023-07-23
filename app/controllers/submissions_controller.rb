@@ -34,14 +34,16 @@ class SubmissionsController < ApplicationController
             quantity: 1
         }
         if @submission.save
-            session = Stripe::Checkout::Session.create({
-                line_items: line_items.flatten,
-                mode: 'payment',
-                success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
-                cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
+            # session = Stripe::Checkout::Session.create({
+            #     line_items: line_items.flatten,
+            #     mode: 'payment',
+            #     success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
+            #     cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
     
-            })
-            redirect_to session.url, status: 303, allow_other_host: true
+            # })
+            # redirect_to session.url, status: 303, allow_other_host: true
+            debugger
+            redirect_to @submission
         else
             flash[:alert] = @submission.errors.full_messages.join(' ')
             render :new, status: :unprocessable_entity
@@ -68,7 +70,7 @@ class SubmissionsController < ApplicationController
 
     def submission_params
         params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file, :year,
-            order_attributes: [:id, line_items_attributes: [:quantity, :price_id, :cover_transaction_fee]]
+            order_attributes: [:id, :name, :line_1, :line_2, :city, :state, :zip, line_items_attributes: [:quantity, :price_id, :cover_transaction_fee]]
         )
     end
 

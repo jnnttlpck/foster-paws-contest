@@ -1,8 +1,12 @@
-= form_with model: @order, data: { turbo: false } do |f|
-    .form-group 
-        = f.label :email
-        = f.text_field :email, required: true
-        == render partial: 'form'
+.container.lg-top-margin 
+    .row
+        .col-md-6
+            = form_with model: @order, data: { turbo: false } do |f|
+                .form-group.form-floating
+                    = f.text_field :email, required: true, class: 'form-control'
+                    = f.label :email
+                .form-group
+                    == render partial: 'form', locals: { f: f }
 
-    .form-group
-        = f.submit 'Order', class: 'btn btn-success'
+                .form-group
+                    = f.submit 'Order', class: 'btn btn-primary'

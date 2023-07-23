@@ -19,3 +19,23 @@
                     - stripe_price = sprintf('%.2f', difference.to_f/100)
                     
                     == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
+        h4 Ship to 
+        .form-group.form-floating
+            = f.text_field :name, required: true, class: 'form-control'
+            = f.label :name
+        .form-group.form-floating
+            = f.text_field :line_1, required: true, class: 'form-control'
+            = f.label :line_1, 'Street'
+        .form-group.form-floating
+            = f.text_field :line_2, class: 'form-control'
+            = f.label :line_2, 'Apt #, etc'
+        .form-group.form-floating
+            = f.text_field :city, required: true, class: 'form-control'
+            = f.label :city
+        .form-group.form-floating
+            = f.select :state, CS.states(:us).keys, {}, required: true, class: 'form-select'
+            = f.label :state
+        .form-group.form-floating
+            = f.text_field :zip, required: true, class: 'form-control'
+            = f.label :zip
+            

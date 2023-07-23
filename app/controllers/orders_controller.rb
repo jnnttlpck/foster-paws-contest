@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.require(:order).permit(:email, line_items_attributes: [:id, :quantity, :price_id, :cover_transaction_fee])
+        params.require(:order).permit(:email, :name, :line_1, :line_2, :city, :state, :zip, line_items_attributes: [:id, :quantity, :price_id, :cover_transaction_fee])
     end
 
 end

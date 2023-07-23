@@ -50,6 +50,7 @@ gem "image_processing", "~> 1.2"
 
 gem 'bootstrap', '~> 5.3.0.alpha3'
 gem "bootswatch", github: "thomaspark/bootswatch"
+gem 'city-state'
 gem 'faker'
 gem "font-awesome-rails"
 gem 'jquery-rails'
