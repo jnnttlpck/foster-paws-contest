@@ -2,6 +2,15 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   
+    toggleOrder(e) {
+        if (e.target.checked) {
+            this.addOrder(e)
+        } else {
+            this.removeOrder()
+        }
+ 
+    }
+
     addOrder(e) {
         e.preventDefault()
         const params = new URLSearchParams
@@ -15,5 +24,9 @@ export default class extends Controller {
         fetch(`${url}?${params}`, options)
             .then(response => response.text())
             .then(html => Turbo.renderStreamMessage(html))
+    }
+
+    removeOrder() {
+        
     }
 }

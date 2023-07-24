@@ -42,7 +42,6 @@ class SubmissionsController < ApplicationController
     
             # })
             # redirect_to session.url, status: 303, allow_other_host: true
-            debugger
             redirect_to @submission
         else
             flash[:alert] = @submission.errors.full_messages.join(' ')

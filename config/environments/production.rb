@@ -39,7 +39,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # TODO: update
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
   config.active_storage.variant_processor = :mini_magick
   
   # Mount Action Cable outside main process or domain.
