@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+    invisible_captcha only: [:create], honeypot: :subtitle
+    
     def new
         @order = Order.new
         @product = Product.find_by(name: 'Calendar')

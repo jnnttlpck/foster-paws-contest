@@ -12,6 +12,7 @@
     
         .col-md-6.col-sm-12
             = form_with model: @submission, data: { turbo: false } do |f|
+                = f.invisible_captcha :subtitle
                 = f.hidden_field :year, value: 1.year.from_now.year
                 .form-group.form-floating
                     = f.text_field :first_name, class: 'form-control', placeholder: 'First Name', required: true

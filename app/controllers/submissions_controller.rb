@@ -1,4 +1,5 @@
 class SubmissionsController < ApplicationController
+    invisible_captcha only: [:create], honeypot: :subtitle
     before_action lambda {
         resize_image_before_upload(submission_params[:file], 800, 800)
     }, only: [:create]

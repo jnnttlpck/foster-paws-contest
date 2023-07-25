@@ -54,6 +54,7 @@ gem "bootswatch", github: "thomaspark/bootswatch"
 gem 'city-state'
 gem 'faker'
 gem "font-awesome-rails"
+gem 'invisible_captcha'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'mini_racer'
