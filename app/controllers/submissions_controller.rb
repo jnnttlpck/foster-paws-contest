@@ -24,8 +24,7 @@ class SubmissionsController < ApplicationController
             @submission.order.status = :open
             @submission.order.email = @submission.email
             line_items << @order.line_items.map do |li|
-                price = li.cover_transaction_fee? ? li.price.product.prices.find_by(transaction_fee: true) : li.price
-                { price: price.stripe_key, quantity: li.quantity }
+                { price: li.price.stripe_key, quantity: li.quantity }
             end
         end
         submission_product = Product.find_by(name: 'submission')

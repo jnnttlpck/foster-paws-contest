@@ -1,24 +1,14 @@
 - Product.where.not(name: 'submission').all.each do |product|
     div
         == f.fields_for :line_items, @order.line_items.build do |ff|
-            - base_price = product.prices.find_by(transaction_fee: false)
-
             == ff.hidden_field :price_id, value: base_price.id
             h4 == product.name.titleize
+            - base_price = product.prices.find_by(transaction_fee: false)
             - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
             h5 == "$#{sprintf('%.2f', stripe_price.to_f/100)}"
             .form-group.col-md-3
                 == ff.label :quantity
                 = ff.number_field :quantity, min: 1, class: 'form-control', required: true
-            .form-check
-                = ff.label :cover_transaction_fee, class: 'sm-bottom-margin form-check-label' do 
-                    = ff.check_box :cover_transaction_fee, class: 'form-check-input'
-                    - transaction_price = product.prices.find_by(transaction_fee: true)
-                    - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
-                    - difference = stripe_transaction_price - stripe_price
-                    - stripe_price = sprintf('%.2f', difference.to_f/100)
-                    
-                    == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
         h4 Ship to 
         .form-group.form-floating
             = f.text_field :name, required: true, class: 'form-control'
