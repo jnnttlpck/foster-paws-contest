@@ -1,7 +1,7 @@
 .container.xl-top-margin.flex-column.align-center
     .display-1.xl-bottom-margin.text-center Welcome to the Cutest Cat of the Upstate Contest!
     .flex-row.justify-center.space-around.no-wrap.md-gap
-        == image_tag('catandSC.png', class: 'img-responsive home-page-graphic')
+        == image_tag('catandSC2.png', class: 'img-responsive home-page-graphic')
             / == image_tag('SC1.png', class: 'img-responsive background-img')
             / == image_tag('cat1.png', class: 'img-responsive foreground-img')
 
@@ -13,13 +13,12 @@
             /     span.badge.bg-info == "#{Submission.all.size} cuties have entered!"
             .flex-row.md-gap.lg-top-margin
                 == link_to new_submission_path, class: 'btn btn-primary btn-lg' do
-                    == fa_icon 'plus', class: 'xs-right-margin'
-                    == fa_icon 'cat', class: 'xs-right-margin'
+                    == fa_icon 'camera', class: 'xs-right-margin'
                     | Submit your kitty
                 == link_to new_order_path, class: 'btn btn-secondary btn-lg' do 
-                    == fa_icon 'calendar-days', class: 'xs-right-margin'
+                    == fa_icon 'calendar', class: 'xs-right-margin'
                     | Pre-Order Calendar
-    .foster-paws-box
+    .foster-paws-box.flex-row.space-around.align-center
         h3 Presented by Foster Paws
         == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'lg-bottom-margin'
 / add to footer
