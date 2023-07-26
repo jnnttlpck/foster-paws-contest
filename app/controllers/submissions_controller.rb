@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
     invisible_captcha only: [:create], honeypot: :subtitle
+    before_action :authenticate_user!, only: [:new, :create]
     before_action :set_stripe_vars, only: [:new, :create]
     before_action lambda {
         resize_image_before_upload(submission_params[:file], 800, 800)
@@ -23,7 +24,6 @@ class SubmissionsController < ApplicationController
         line_items = []
         if (@order = @submission.order)
             @submission.order.status = :open
-            @submission.order.email = @submission.email
             line_items << @order.line_items.map do |li|
                 { price: li.price.stripe_key, quantity: li.quantity }
             end

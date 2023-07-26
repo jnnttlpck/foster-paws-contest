@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_011441) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_025204) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,7 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_011441) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "email"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,9 +81,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_011441) do
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
     t.string "pet_name"
     t.string "location"
     t.datetime "created_at", null: false
@@ -97,6 +93,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_011441) do
     t.boolean "cover_transaction_fee", default: false
     t.integer "year"
     t.string "cat_age"
+    t.integer "user_id", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -120,4 +120,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_011441) do
   add_foreign_key "line_items", "prices"
   add_foreign_key "orders", "submissions"
   add_foreign_key "prices", "products"
+  add_foreign_key "submissions", "users"
 end

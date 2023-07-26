@@ -9,14 +9,14 @@
     submission = Submission.new(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        email: Faker::Internet.email,
         pet_name: Faker::Creature::Cat.name,
         location: Faker::Address.city,
         got_cat: Faker::Lorem.paragraph(sentence_count: 10),
         about: Faker::Lorem.paragraph(sentence_count: 20),
         status: :complete,
         year: 1.year.from_now.year,
-        cat_age: "#{Faker::Number.number(digits: 2)} months"
+        cat_age: "#{Faker::Number.number(digits: 2)} months",
+        user: User.create(email: Faker::Internet.email, password: Faker::Internet.password(min_length: 6))
 
     )
     url = Faker::LoremFlickr.image(search_terms: ['cat', 'kitten'])

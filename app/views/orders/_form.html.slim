@@ -1,5 +1,6 @@
 - Product.where.not(name: 'submission').all.each do |product|
     div
+        = f.hidden_field :user_id, value: current_user.id
         == f.fields_for :line_items, @order.line_items.build do |ff|
             == ff.hidden_field :price_id, value: base_price.id
             h4 == product.name.titleize

@@ -3,9 +3,6 @@
         .col-md-6
             = form_with model: @order, data: { turbo: false } do |f|
                 = f.invisible_captcha :subtitle
-                .form-group.form-floating
-                    = f.text_field :email, required: true, class: 'form-control'
-                    = f.label :email
                 .form-group
                     == render partial: 'form', locals: { f: f }
 

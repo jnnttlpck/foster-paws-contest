@@ -1,4 +1,5 @@
 class Submission < ApplicationRecord
+    belongs_to :user
     has_one :order, dependent: :destroy
     has_one_attached :file do |attachable|
         attachable.variant :medium, resize_to_limit: [800, 800]
@@ -19,6 +20,8 @@ class Submission < ApplicationRecord
     }
 
     accepts_nested_attributes_for :order
+
+    delegate :email, to: :user
 
     private
 
