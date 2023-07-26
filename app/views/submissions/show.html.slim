@@ -6,8 +6,8 @@
                 .info
                     h3 == @submission.pet_name
                     h4 
-                        | DOB: 
-                        == submission.cat_dob&.to_fs(:long)
+                        | Age: 
+                        == submission.cat_age
                     - if current_user
                         h5 Submitted by
                         == [@submission.first_name, @submission.last_name].join(' ')

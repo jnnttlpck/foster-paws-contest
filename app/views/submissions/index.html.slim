@@ -11,8 +11,8 @@
                             .info
                                 h4.card-title = submission.pet_name
                                 h5
-                                    | DOB: 
-                                    == submission.cat_dob&.to_fs(:long)
+                                    | Age: 
+                                    == submission.cat_age
                                 p.card-text.text-secondary = submission.location
                                 p.about = submission.about
                                     / p = simple_format(submission.got_cat)

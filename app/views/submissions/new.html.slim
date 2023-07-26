@@ -30,9 +30,9 @@
                     = f.text_field :pet_name, class: 'form-control', placeholder: 'Cat Name', required: true
                     = f.label :pet_name, 'Cat Name'
                 .form-group.form-floating 
-                    = f.date_field :cat_dob, class: 'form-control', placeholder:'Cat Birthday'
-                    = f.label :cat_dob, 'Cat Birthday'
-                    .form-text A guess is totally fine!
+                    = f.text_field :cat_age, class: 'form-control', placeholder:'How old is your cat?'
+                    = f.label :cat_age, 'How old is your cat?'
+                    .form-text Approximate is totally fine!
                 .form-group.form-floating
                     = f.text_area :got_cat, class: 'form-control', placeholder: 'How did you cat come into your life?', style: "height: 100px;"
                     = f.label :got_cat, 'How did you cat come into your life?'

@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_014847) do
     t.integer "pre_order_quantity"
     t.boolean "cover_transaction_fee", default: false
     t.integer "year"
-    t.date "cat_dob"
+    t.string "cat_age"
   end
 
   create_table "users", force: :cascade do |t|

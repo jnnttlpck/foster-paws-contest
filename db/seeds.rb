@@ -16,7 +16,7 @@
         about: Faker::Lorem.paragraph(sentence_count: 20),
         status: :complete,
         year: 1.year.from_now.year,
-        cat_dob: Faker::Date.in_date_period
+        cat_age: "#{Faker::Number.number(digits: 2)} months"
 
     )
     url = Faker::LoremFlickr.image(search_terms: ['cat', 'kitten'])
