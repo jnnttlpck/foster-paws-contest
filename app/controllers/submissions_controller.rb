@@ -19,6 +19,7 @@ class SubmissionsController < ApplicationController
     end
 
     def create
+        # TODO: set open to status default
         @submission = Submission.new(submission_params)
         @submission.status = :open
         line_items = []
@@ -68,7 +69,7 @@ class SubmissionsController < ApplicationController
     private
 
     def submission_params
-        params.require(:submission).permit(:first_name, :last_name, :email, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file, :year, :cat_age,
+        params.require(:submission).permit(:first_name, :last_name, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file, :year, :cat_age, :user_id,
             order_attributes: [:id, :name, :line_1, :line_2, :city, :state, :zip, line_items_attributes: [:quantity, :price_id, :cover_transaction_fee]]
         )
     end
