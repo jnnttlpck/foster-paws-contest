@@ -9,7 +9,7 @@ class Submission < ApplicationRecord
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :location, presence: true
-    validates :pet_name, presence: true
+    validates :pet_name, presence: true, uniqueness: { scope: :user_id }
     validates :file, presence: true
     validates :email, presence: true, format: URI::MailTo::EMAIL_REGEXP
     validate :file_image_format
