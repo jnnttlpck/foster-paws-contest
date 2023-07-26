@@ -7,12 +7,12 @@
                     h3 == @submission.pet_name
                     h4 
                         | Age: 
-                        == submission.cat_age
+                        == @submission.cat_age
                     - if current_user.admin?
                         h5 Submitted by
-                        == [@submission.first_name, @submission.last_name].join(' ')
-                        == @submission.email
-                    h4 == @submission.location
+                        div == [@submission.first_name, @submission.last_name].join(' ')
+                        div == @submission.email
+                    h5 == @submission.location
                 == link_to submissions_path, class: 'btn btn-primary' do
                     == fa_icon('arrow-left', class: 'xs-right-margin')
                     | Back to All
@@ -22,5 +22,8 @@
             h5 More about
             p == simple_format(@submission.about)
         .col-md-8
-            == image_tag @submission.file.variant(:medium) if @submission.file.attached?
+            == image_tag @submission.file.variant(:small) if @submission.file.attached?
+            - if current_user.admin?
+                div == link_to 'Download', rails_blob_path(@submission.file, disposition: "attachment")
+
         
