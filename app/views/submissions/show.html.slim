@@ -8,7 +8,7 @@
                     h4 
                         | Age: 
                         == submission.cat_age
-                    - if current_user
+                    - if current_user.admin?
                         h5 Submitted by
                         == [@submission.first_name, @submission.last_name].join(' ')
                         == @submission.email
