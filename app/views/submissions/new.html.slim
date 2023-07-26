@@ -44,16 +44,8 @@
                     = f.file_field :file, class: 'form-control', required: true
                 .form-check
                     = f.label :cover_transaction_fee, class: 'sm-bottom-margin form-check-label' do 
-
                         => f.check_box :cover_transaction_fee, class: 'form-check-input'
-                        - submission_product = Product.find_by(name: 'submission')
-                        - base_price = submission_product.prices.find_by(transaction_fee: false)
-                        - transaction_price = submission_product.prices.find_by(transaction_fee: true)
-                        - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
-                        - stripe_transaction_price = Stripe::Price.retrieve(transaction_price.stripe_key).unit_amount
-                        - difference = stripe_transaction_price - stripe_price
-                        - stripe_price = sprintf('%.2f', difference.to_f/100)
-                        == "Cover credit card transaction fee ❤️ (+ $#{stripe_price})"
+                        == "Cover credit card transaction fee ❤️ (+ $#{formatted_transaction_fee(@base_price, @transaction_price)})"
                 .form-group data-controller='orders'
                     == link_to  add_order_submissions_path, class: 'btn btn-secondary', data: { action: 'orders#addOrder' } do 
                         == fa_icon 'plus', class: 'xs-right-margin'

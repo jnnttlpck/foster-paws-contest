@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
     invisible_captcha only: [:create], honeypot: :subtitle
+    before_action :set_stripe_vars, only: [:new, :create]
     before_action lambda {
         resize_image_before_upload(submission_params[:file], 800, 800)
     }, only: [:create]
@@ -27,8 +28,7 @@ class SubmissionsController < ApplicationController
                 { price: li.price.stripe_key, quantity: li.quantity }
             end
         end
-        submission_product = Product.find_by(name: 'submission')
-        submission_price = @submission.cover_transaction_fee? ? submission_product.prices.find_by(transaction_fee: true) : submission_product.prices.find_by(transaction_fee: false)
+        submission_price = @submission.cover_transaction_fee? ? @transaction_price : @base_price
         line_items << {
             price: submission_price.stripe_key,
             quantity: 1
@@ -82,9 +82,12 @@ class SubmissionsController < ApplicationController
             .resize_to_fit(width, height)
             .call(destination: image_param.tempfile.path)
         rescue StandardError => e
-
         end
-        
+    end
 
+    def set_stripe_vars
+        submission_product = Product.find_by(name: 'submission')
+        @base_price = submission_product.prices.find_by(transaction_fee: false)
+        @transaction_price = submission_product.prices.find_by(transaction_fee: true)
     end
 end
