@@ -27,3 +27,15 @@
 
 end
 
+30.times do
+    order = Order.create(
+        name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
+        line_1: Faker::Address.street_address,
+        line_2: '',
+        city: Faker::Address.city,
+        state: Faker::Address.state_abbr,
+        zip: Faker::Address.zip_code,
+        user: User.create(email: Faker::Internet.email, password: Faker::Internet.password(min_length: 6))
+    )
+    order.line_items.create(quantity: Faker::Number.number(digits: 1), price: Product.find_by(name: 'calendar').prices.last)
+end

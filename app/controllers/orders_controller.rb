@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
     invisible_captcha only: [:create], honeypot: :subtitle
     before_action :authenticate_user!, only: [:new, :create]
+
+    def index
+        @orders = Order.where(status: :complete)
+    end
     
     def new
         @order = Order.new

@@ -1,0 +1,29 @@
+.container
+    .row 
+        .col-md-12  
+            table.table.table-responsive 
+                thead 
+                    tr 
+                        th Name 
+                        th Address 
+                        th Address line 2
+                        th City 
+                        th State 
+                        th Zip 
+                        th Product 
+                        th Quantity
+                tbody 
+                    - @orders.each do |order|
+                        tr 
+                            td == order.name
+                            td == order.line_1 
+                            td == order.line_2 
+                            td == order.city 
+                            td == order.state 
+                            td == order.zip 
+                            td == order.line_items.first.price.product.name.titleize 
+                            td == order.line_items.first.quantity
+                            / td 
+                            /     - order.line_items.each do |line_item|
+                            /         tr 
+                                        
