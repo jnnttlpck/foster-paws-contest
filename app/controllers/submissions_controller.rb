@@ -69,7 +69,7 @@ class SubmissionsController < ApplicationController
     private
 
     def submission_params
-        params.require(:submission).permit(:first_name, :last_name, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file, :year, :cat_age, :user_id,
+        params.require(:submission).permit(:first_name, :last_name, :location, :pet_name, :got_cat, :about, :cover_transaction_fee, :file, :year, :cat_age, :user_id, :rules_and_conditions,
             order_attributes: [:id, :name, :line_1, :line_2, :city, :state, :zip, line_items_attributes: [:quantity, :price_id, :cover_transaction_fee]]
         )
     end

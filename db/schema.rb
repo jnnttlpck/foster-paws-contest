@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_025204) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_27_022548) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -61,7 +61,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_025204) do
     t.string "city"
     t.string "state"
     t.string "zip"
+    t.integer "user_id", null: false
     t.index ["submission_id"], name: "index_orders_on_submission_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -96,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_025204) do
     t.integer "user_id", null: false
     t.string "last_name"
     t.string "first_name"
+    t.boolean "rules_and_conditions", default: false
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
@@ -119,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_025204) do
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "prices"
   add_foreign_key "orders", "submissions"
+  add_foreign_key "orders", "users"
   add_foreign_key "prices", "products"
   add_foreign_key "submissions", "users"
 end
