@@ -10,4 +10,8 @@ Rails.application.routes.draw do
     get 'success'
     get 'cancel'
   end
+  resources :donations, only: [:create] do
+    get 'success', on: :collection
+    get 'cancel', on: :collection
+  end
 end

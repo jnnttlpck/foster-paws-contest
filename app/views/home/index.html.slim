@@ -19,7 +19,17 @@
                     == fa_icon 'calendar', class: 'xs-right-margin'
                     | Pre-Order Calendar
     .foster-paws-box.flex-row.space-around.align-center
-        h3 Presented by Foster Paws
-        == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'lg-bottom-margin'
+        .fp-info
+            h2 Presented by Foster Paws
+            hr
+            h4 Donate today!
+            = form_with url: donations_path, data: { turbo: false } do |f|
+                - prices = Stripe::Price.list.data.select { |p| p.to_h[:product] == Product.find_by(name: 'donation').stripe_key }
+                .form-group
+                    = f.label :amount
+                    = f.select :amount, prices.map { |p| [price_display(p), p.id]}, {}, class: 'form-select'
+                == f.submit 'Donate', class: 'btn btn-primary'
+        .fp-logo
+        == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/'
 / add to footer
 / <a href="https://www.freepik.com/free-vector/coloured-cats-collection_1072063.htm#query=cat&position=6&from_view=search&track=sph">Image by terdpongvector</a> on Freepik

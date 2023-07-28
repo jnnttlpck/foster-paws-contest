@@ -36,13 +36,13 @@ body {
     padding: 3rem;
 }
 .foster-paws-box {
-    border-radius: 10%;
+    border-radius: 20px;
     background-color: lightblue;
     padding: 3rem;
     margin: 1rem;
     width: 80vw;
     img {
-        width: 150px;
+        max-width: 300px;
         height: auto;
     }
 }
