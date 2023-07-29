@@ -1,4 +1,4 @@
-<%= turbo_stream.after 'order' do %>
+<%= turbo_stream.update 'order' do %>
     <h4>New Order</h4>
     <%= fields_for @submission do |ff| %>
         <%= ff.fields_for :order, @order do |ffo| %>
