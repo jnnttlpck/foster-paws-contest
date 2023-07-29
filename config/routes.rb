@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get 'success'
     get 'cancel'
     get 'add_order', on: :collection
+    get 'needs_approval', on: :collection
+    post 'log_approvals', on: :collection
   end
   resources :orders do
     get 'success'

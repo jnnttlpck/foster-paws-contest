@@ -12,11 +12,17 @@ html
     nav.navbar.navbar-expand-lg.bg-primary
       .container-fluid
           .titles.flex-row.align-base
-            == link_to 'Upstate Cuteist Kitty Contest', root_path, class: 'navbar-brand text-light'
-            .nav-item == link_to 'Presented by Foster Paws', '#', class: 'nav-link text-light'
+            == link_to 'Cutest Cats of the Upstate Contest', root_path, class: 'navbar-brand text-light'
+            .nav-item == link_to 'Presented by Foster Paws Rescue', '#', class: 'nav-link text-light'
 
           .links
               ul.navbar-nav.text-light
+                  - if current_user&.admin?
+                    li.nav-item 
+                      == link_to needs_approval_submissions_path, class: 'nav-link text-light' do
+                        | Approve Submissions
+                        span.badge.bg-danger.xs-left-margin
+                          == Submission.where(approved: nil, status: :complete).size
                     li.nav-item == link_to 'Orders', orders_path, class: 'nav-link text-light'
                   li.nav-item == link_to 'See all submissions', submissions_path, class: 'nav-link text-light'
                   - if current_user 
