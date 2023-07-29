@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/f564595/repositories/foster-paws-contest
+    - /bin/cp -R images $DEPLOYPATH
