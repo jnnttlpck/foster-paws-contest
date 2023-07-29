@@ -16,7 +16,8 @@
         status: :complete,
         year: 1.year.from_now.year,
         cat_age: "#{Faker::Number.number(digits: 2)} months",
-        user: User.create(email: Faker::Internet.email, password: Faker::Internet.password(min_length: 6))
+        user: User.create(email: Faker::Internet.email, password: Faker::Internet.password(min_length: 6)),
+        rules_and_conditions: true
 
     )
     url = Faker::LoremFlickr.image(search_terms: ['cat', 'kitten'])

@@ -1,0 +1,21 @@
+.container.lg-top-margin.lg-bottom-margin
+    .row
+        .col-md-12
+            = form_with url: log_approvals_submissions_path do |f|
+                .lg-bottom-margin = f.submit 'Approve', class: 'btn btn-primary'
+                - @submissions.each do |submission|
+                    = f.fields_for 'submission[]', submission do |ff|
+                        = ff.check_box :approved, {checked: true}
+                        .card.mb-3
+                            .row.g-0 
+                                .col-md-4
+                                    = image_tag submission.file.variant(:small), class: 'image' if submission.file.attached?
+                                .col-md-8
+                                    .card-body
+                                        h5.cat-title == submission.pet_name 
+                                        p.cart-text == submission.cat_age
+                                        p.card-text == submission.location 
+                                        p.card-text == submission.got_cat 
+                                        p.card-text == submission.about
+                = f.submit 'Approve', class: 'btn btn-primary'
+

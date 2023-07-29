@@ -7,7 +7,18 @@ class SubmissionsController < ApplicationController
     }, only: [:create]
 
     def index
-        @submissions = Submission.where(status: :complete)
+        @submissions = Submission.where(status: :complete, approved: true).reverse
+    end
+
+    def needs_approval
+        @submissions = Submission.where(status: :complete, approved: nil)
+    end
+
+    def log_approvals
+        params[:submission].each do |id, approved|
+            Submission.find(id).update(approved: approved[:approved])
+        end
+        redirect_to submissions_path, notice: 'Submissions Approved'
     end
 
     def show
@@ -35,15 +46,15 @@ class SubmissionsController < ApplicationController
             quantity: 1
         }
         if @submission.save
-            # session = Stripe::Checkout::Session.create({
-            #     line_items: line_items.flatten,
-            #     mode: 'payment',
-            #     success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
-            #     cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
+            session = Stripe::Checkout::Session.create({
+                line_items: line_items.flatten,
+                mode: 'payment',
+                success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
+                cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
     
-            # })
-            # redirect_to session.url, status: 303, allow_other_host: true
-            redirect_to @submission
+            })
+            redirect_to session.url, status: 303, allow_other_host: true
+            # redirect_to @submission
         else
             flash[:alert] = @submission.errors.full_messages.join(' ')
             render :new, status: :unprocessable_entity
