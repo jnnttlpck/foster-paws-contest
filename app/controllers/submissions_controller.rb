@@ -27,6 +27,20 @@ class SubmissionsController < ApplicationController
 
     def new
         @submission = Submission.new
+        if true || Date.today > Date.new(2023,8,31)
+            redirect_to closed_submissions_path
+        end
+    end
+
+    def closed
+    end
+
+    def my_submissions
+        if current_user 
+            @submissions = current_user.submissions 
+        else
+            redirect_to new_user_session_path
+        end
     end
 
     def create

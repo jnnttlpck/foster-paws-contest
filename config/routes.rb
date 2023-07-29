@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'add_order', on: :collection
     get 'needs_approval', on: :collection
     post 'log_approvals', on: :collection
+    get 'closed', on: :collection
     get 'my_submissions', on: :collection
   end
   resources :orders do
