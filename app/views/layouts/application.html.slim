@@ -26,6 +26,7 @@ html
     /                 li.nav-item == link_to 'Orders', orders_path, class: 'nav-link text-light'
     /               li.nav-item == link_to 'See all submissions', submissions_path, class: 'nav-link text-light'
     /               - if current_user 
+    /                 li.nav-item == link_to 'My Submissions', my_submissions_submissions_path, class: 'nav-link text-light'
     /                 li.nav-item == link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-light', data: { 'turbo-method': :delete }
     /               - else
     /                 li.nav-item == link_to 'Login', new_user_session_path, class: 'nav-link text-light'

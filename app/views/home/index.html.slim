@@ -1,39 +1,39 @@
 h1 Coming Soon!
 / .container.xl-top-margin
-/     .display-1.xl-bottom-margin.text-center Welcome to the Cutest Cats of the Upstate Contest!
-/     .row
-/         .col-md-6.col-sm-12.home-page-graphic
-/             == image_tag('catandSC2.png', class: 'img-fluid')
-/             / == image_tag('SC1.png', class: 'img-responsive background-img')
-/             / == image_tag('cat1.png', class: 'img-responsive foreground-img')
+    / .display-1.xl-bottom-margin.text-center Welcome to the Cutest Cats of the Upstate Contest!
+    / .row
+    /     .col-md-6.col-sm-12.home-page-graphic
+    /         == image_tag('catandSC2.png', class: 'img-fluid')
+    /         / == image_tag('SC1.png', class: 'img-responsive background-img')
+    /         / == image_tag('cat1.png', class: 'img-responsive foreground-img')
 
-/         .col-md-6.col-sm-12
-/             h1.text-primary Enter your cutest cat pic! 
-/             h5.text-primary Winners will be featured in the Foster Paws 2024 calendar.
-/             h5.text-primary Deadline is August 31st, 2023.
-/             h5.text-primary Submissions are $5 each.
-/             h5.text-primary All submissions benefit Foster Paws Rescue.
-/             / h5 
-/             /     span.badge.bg-info == "#{Submission.all.size} cuties have entered!"
-/             .flex-row.md-gap.lg-top-margin
-/                 == link_to new_submission_path, class: 'btn btn-primary btn-lg' do
-/                     == fa_icon 'camera', class: 'xs-right-margin'
-/                     | Submit your kitty
-/                 == link_to new_order_path, class: 'btn btn-secondary btn-lg' do 
-/                     == fa_icon 'calendar', class: 'xs-right-margin'
-/                     | Pre-Order Calendar
-/     .row
-/         .col-md-12.md-top-margin
-/             .foster-paws-box.flex-row.space-around.align-center
-/                 .fp-info
-/                     h2 Presented by Foster Paws Rescue
-/                     hr
-/                     h4 Your donations help save Upstate Cats and are always appreciated - Donate today!
-/                     - prices = Stripe::Price.list.data.select { |p| p.to_h[:product] == Product.find_by(name: 'donation').stripe_key }
-/                     .flex-row.sm-gap.sm-top-margin
-/                         - prices.reverse.each do |price|
-/                             = button_to price_display(price), donations_path, params: {amount: price.id}, class: 'btn btn-primary', data: {turbo: false}
-/                 .fp-logo.md-top-margin.md-bottom-margin
-/                     == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'img-fluid'
-/         / add to footer
-/         / <a href="https://www.freepik.com/free-vector/coloured-cats-collection_1072063.htm#query=cat&position=6&from_view=search&track=sph">Image by terdpongvector</a> on Freepik
+    /     .col-md-6.col-sm-12
+    /         h1.text-primary Enter your cutest cat pic!
+    /         h5.text-primary Enter as many cats as you like.
+    /         h5.text-primary One submission per cat please. 
+    /         h5.text-primary Winners will be featured in the Foster Paws 2024 calendar.
+    /         h5.text-primary Deadline is August 31st, 2023.
+    /         h5.text-primary Submissions are $5 each.
+    /         h5.text-primary All submissions benefit Foster Paws Rescue.
+    /         .flex-row.md-gap.lg-top-margin
+    /             == link_to new_submission_path, class: 'btn btn-primary btn-lg' do
+    /                 == fa_icon 'camera', class: 'xs-right-margin'
+    /                 | Submit your kitty
+    /             == link_to new_order_path, class: 'btn btn-secondary btn-lg' do 
+    /                 == fa_icon 'calendar', class: 'xs-right-margin'
+    /                 | Pre-Order Calendar
+    / .row
+    /     .col-md-12.md-top-margin
+    /         .foster-paws-box.flex-row.space-around.align-center
+    /             .fp-info
+    /                 h2 Presented by Foster Paws Rescue
+    /                 hr
+    /                 h4 Your donations help save Upstate Cats and are always appreciated - Donate today!
+    /                 - prices = Stripe::Price.list.data.select { |p| p.to_h[:product] == Product.find_by(name: 'donation').stripe_key }
+    /                 .flex-row.sm-gap.sm-top-margin
+    /                     - prices.reverse.each do |price|
+    /                         = button_to price_display(price), donations_path, params: {amount: price.id}, class: 'btn btn-primary', data: {turbo: false}
+    /             .fp-logo.md-top-margin.md-bottom-margin
+    /                 == link_to image_tag('foster_paws_logo.png'), 'http://fosterpaws.org/', class: 'img-fluid'
+    /     / add to footer
+    /     / <a href="https://www.freepik.com/free-vector/coloured-cats-collection_1072063.htm#query=cat&position=6&from_view=search&track=sph">Image by terdpongvector</a> on Freepik

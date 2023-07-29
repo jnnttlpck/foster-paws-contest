@@ -1,0 +1,7 @@
+.container.xl-top-margin
+    .row 
+        .col-md-12
+            - @submissions.each do |submission|
+                .md-bottom-margin
+                    == image_tag submission.file.variant(:small) if submission.file.attached?
+                    == link_to submission.pet_name, submission_path(submission)

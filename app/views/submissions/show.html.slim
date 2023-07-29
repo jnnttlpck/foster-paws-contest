@@ -2,7 +2,8 @@
     .row
         .col-md-4
             .flex-row.space-between.align-top
-
+                - if @submission.approved == false
+                    .alert.alert-danger Sorry, this submission was rejected due to inappropriate content
                 .info
                     h3 == @submission.pet_name
                     h4 
