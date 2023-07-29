@@ -13,7 +13,7 @@
                 ul 
                     li No blurry pics - we want to see your furbaby!
                     li Let your cat be the star! Try and feature just your cat - no other pets or people 
-                    li Try and use good lighting - voids + dark photos never turns out great 
+                    li Try to use good lighting - voids + dark photos never turns out great 
                     li Nothing inappropriate please! Keep it cute.
                 h4.md-top-margin Contest info:
                 ul 
@@ -23,8 +23,8 @@
                     li Pic, location, and cat info will be displayed publicly 
                     li Name, email, and orders will be kept private 
                     li By submitting, you give us permission to use your photo in the Foster Paws calendar
-                    li Winners will be announced...
-                    li Submissions will be accepted until...
+                    li Winners will be announced on or before September 25, 2023
+                    li Submissions will be accepted until midnight, August 31, 2023
                     
     
         .col-md-6.col-sm-12
@@ -49,8 +49,8 @@
                     = f.label :cat_age, 'How old is your cat?'
                     .form-text Approximate is totally fine!
                 .form-group.form-floating
-                    = f.text_area :got_cat, class: 'form-control', placeholder: 'How did you cat come into your life?', style: "height: 100px;"
-                    = f.label :got_cat, 'How did you cat come into your life?'
+                    = f.text_area :got_cat, class: 'form-control', placeholder: 'How did your cat come into your life?', style: "height: 100px;"
+                    = f.label :got_cat, 'How did your cat come into your life?'
                 .form-group.form-floating
                     = f.text_area :about, class: 'form-control md-text-area', placeholder: 'Tell us more about your cat!', style: "height: 100px;"
                     = f.label :about, 'Tell us more about your cat!'
@@ -67,9 +67,9 @@
                         | Add Calendar Pre-Order
                 #order
                 .i By entering into this Contest, each entrant represents and warrants that (i) their submission is original; (ii) they are the sole creator of the Submission; (iii) that the Submission does not violate the rights of any third party or infringe or violate any law and, as of the date of the Submission, is not the subject of any actual or threatened litigation or claim; and (iv) the Submission does not and will not violate any applicable laws, and is not and will not be defamatory, libelous, pornographic, or obscene. Note: Sponsor reserves the right, in sole discretion, to disqualify any Submission in the Contest if Sponsor views the Submission as potentially infringing, a violation or potential violation of a third party’s rights, or if it deems the Submission to be lacking in taste or quality, or to be otherwise objectionable.
-
-                = f.label :rules_and_conditions, class: 'sm-bottom-margin form-check-label' do 
-                    => f.check_box :rules_and_conditions, class: 'form-check-input'
-                    | I verify I have read and unstand the rules and agreement above.
+                .form-check.md-top-margin
+                    = f.label :rules_and_conditions, class: 'sm-bottom-margin form-check-label' do 
+                        => f.check_box :rules_and_conditions, class: 'form-check-input'
+                        | I verify I have read and unstand the rules and agreement above.
                 = f.submit 'Submit & Donate', class: 'btn btn-primary'
                 

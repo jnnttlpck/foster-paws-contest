@@ -28,8 +28,11 @@ body {
 }
 
 .home-page-graphic {
-    height: 400px;
-    width: auto;
+    img {
+        max-height: 400px;
+        width: auto;
+    }
+
 }
 
 .right-side { 
@@ -40,9 +43,9 @@ body {
     background-color: lightblue;
     padding: 3rem;
     margin: 1rem;
-    width: 80vw;
-    img {
-        max-width: 300px;
+    // width: 80vw;
+    .fp-logo a img {
+        max-width: 200px;
         height: auto;
     }
 }
