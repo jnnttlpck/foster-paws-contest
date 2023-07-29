@@ -1,10 +1,11 @@
 class DonationsController < ApplicationController
+
     def create
         session = Stripe::Checkout::Session.create({
             line_items: [{price: params[:amount], quantity: 1}],
             mode: 'payment',
-            success_url: "http://localhost:3000/donations/success",
-            cancel_url: "http://localhost:3000/donations/cancel"
+            success_url: success_donations_url,
+            cancel_url: cancel_donations_url
         })
         redirect_to session.url, status: 303, allow_other_host: true
     end

@@ -49,9 +49,8 @@ class SubmissionsController < ApplicationController
             session = Stripe::Checkout::Session.create({
                 line_items: line_items.flatten,
                 mode: 'payment',
-                success_url: "http://localhost:3000/submissions/#{@submission.id}/success?session_id={CHECKOUT_SESSION_ID}",
-                cancel_url: "http://localhost:3000/submissions/#{@submission.id}/cancel"
-    
+                success_url: submission_success_url(@submission.id) + "?session_id={CHECKOUT_SESSION_ID}",
+                cancel_url: submission_cancel_url(@submission.id)    
             })
             redirect_to session.url, status: 303, allow_other_host: true
             # redirect_to @submission

@@ -21,8 +21,8 @@ class OrdersController < ApplicationController
             session = Stripe::Checkout::Session.create({
                 line_items: line_items,
                 mode: 'payment',
-                success_url: "http://localhost:3000/orders/#{@order.id}/success?session_id={CHECKOUT_SESSION_ID}",
-                cancel_url: "http://localhost:3000/orders/#{@order.id}/cancel"
+                success_url: order_success_url(@order.id) + "?session_id={CHECKOUT_SESSION_ID}",
+                cancel_url: order_cancel_url(@order.id)
             })
             redirect_to session.url, status: 303, allow_other_host: true
         else 
