@@ -313,6 +313,7 @@ DEPENDENCIES
   mini_magick
   mini_racer
   puma (~> 5.0)
+  rails (~> 7.0.6)
   sassc-rails
   selenium-webdriver
   slim-rails
