@@ -57,7 +57,6 @@ gem "font-awesome-rails"
 gem 'invisible_captcha'
 gem 'jquery-rails'
 gem 'mini_magick'
-gem 'mini_racer'
 gem 'stripe'
 
 group :development, :test do
