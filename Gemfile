@@ -49,6 +49,7 @@ gem "sassc-rails"
 gem "image_processing", "~> 1.2"
 
 gem 'aws-sdk-s3', require: false
+gem 'bigdecimal'
 gem 'bootstrap', '~> 5.3.0.alpha3'
 gem "bootswatch", github: "thomaspark/bootswatch"
 gem 'city-state'
