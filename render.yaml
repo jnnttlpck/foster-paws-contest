@@ -9,8 +9,5 @@ services:
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: foster_paws
-          property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
