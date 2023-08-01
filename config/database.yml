@@ -24,3 +24,5 @@ production:
   <<: *default
   database: fosterpaws
   adapter: mysql2
+  username: deploy
+  password: <%= Rails.application.credentials.db_password %>
