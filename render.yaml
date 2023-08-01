@@ -1,6 +1,5 @@
 databases:
-  - name: cuteSCcats
-    databaseName: foster-paws
+  - name: foster_paws
 
 services:
   - type: web
