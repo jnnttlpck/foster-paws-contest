@@ -59,6 +59,7 @@ gem 'invisible_captcha'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'mysql2'
+gem "slim-rails"
 gem 'stripe'
 
 group :development, :test do
@@ -67,7 +68,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "slim-rails"
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
