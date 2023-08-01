@@ -27,7 +27,7 @@ class SubmissionsController < ApplicationController
 
     def new
         @submission = Submission.new
-        if true || Date.today > Date.new(2023,8,31)
+        if Date.today > Date.new(2023,8,31)
             redirect_to closed_submissions_path
         end
     end
