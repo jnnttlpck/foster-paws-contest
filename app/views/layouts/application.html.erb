@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            FosterPawsContest
+        </title>
+
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <%= ::Temple::Utils.escape_html((csrf_meta_tags)) %>
+        <%= ::Temple::Utils.escape_html((csp_meta_tag)) %>
+        <%= ::Temple::Utils.escape_html((stylesheet_link_tag "application", "data-turbo-track": "reload")) %>
+        <%= ::Temple::Utils.escape_html((javascript_importmap_tags)) %>
+    </head>
+    <body>
+        <%= ::Temple::Utils.escape_html((yield)) %>
+    </body>
+</html>
