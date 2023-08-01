@@ -25,4 +25,5 @@ production:
   database: f564595_fosterpaws
   adapter: mysql2
   username: f564595_deploy
+  host: 127.0.0.1
   password: <%= Rails.application.credentials.db_password %>
