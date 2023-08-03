@@ -1,10 +1,14 @@
-.container
+.container.xl-top-margin
     .row
-        .col-md-12
-            h4 == "Thank you #{@submission.first_name}!"
-            h5 Winners will be notified via email
-            h5 Your submission will be visible once approved by our review team.
-            == link_to 'See all submissions', submissions_path, class: 'btn btn-primary'
-            == link_to 'Submit another', new_submission_path, class: 'btn btn-secondary'
+        .col-md-12.flex-row.space-between
+            .message
+                h4 == "Thank you #{@submission.first_name}!"
+                h5 Winners will be notified via email.
+                h5 Your submission will be visible once approved by our review team.
+            .links
+                == link_to 'See all submissions', submissions_path, class: 'btn btn-primary md-right-margin'
+                == link_to 'Submit another', new_submission_path, class: 'btn btn-secondary'
+    .row 
+        .col-md-12.md-top-margin
             h2 What a cutie!
-            == image_tag @submission.file.variant(:small) if @submission.file.attached?
+            .md-top-margin == image_tag @submission.file.variant(:small) if @submission.file.attached?
