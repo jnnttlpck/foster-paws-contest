@@ -1,15 +1,15 @@
-- Product.where.not(name: 'submission').all.each do |product|
+- Product.where.not(name: ['submission', 'donation', 'shipping']).all.each do |product|
     div
         = f.hidden_field :user_id, value: current_user.id
         == f.fields_for :line_items, @order.line_items.build do |ff|
             - base_price = product.prices.find_by(transaction_fee: false)
             - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
+            - shipping_rate = Stripe::ShippingRate.retrieve(Product.find_by(name: 'shipping').prices.first.stripe_key).fixed_amount[:amount]
             == ff.hidden_field :price_id, value: base_price.id
             h4 == product.name.titleize
-            h5 == "$#{sprintf('%.2f', stripe_price.to_f/100)}"
-            .form-group.col-md-3
-                == ff.label :quantity
-                = ff.number_field :quantity, min: 1, class: 'form-control', required: true
+            h5 == "$#{sprintf('%.2f', stripe_price.to_f/100)} ($#{sprintf('%.2f', shipping_rate.to_f/100)} s/h)"
+            == ff.label :quantity
+            = ff.number_field :quantity, min: 1, class: 'form-control', required: true
         h4 Ship to 
         .form-group.form-floating
             = f.text_field :name, required: true, class: 'form-control'

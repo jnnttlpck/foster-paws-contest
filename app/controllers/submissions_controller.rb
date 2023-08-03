@@ -48,11 +48,16 @@ class SubmissionsController < ApplicationController
         @submission = Submission.new(submission_params)
         @submission.status = :open
         line_items = []
+        shipping_rate = []
         if (@order = @submission.order)
             @submission.order.status = :open
+            @submission.order.user = current_user
             line_items << @order.line_items.map do |li|
                 { price: li.price.stripe_key, quantity: li.quantity }
             end
+            shipping_rate << {
+                shipping_rate: Product.find_by(name: 'shipping').prices.first.stripe_key
+            }
         end
         submission_price = @submission.cover_transaction_fee? ? @transaction_price : @base_price
         line_items << {
@@ -62,12 +67,12 @@ class SubmissionsController < ApplicationController
         if @submission.save
             session = Stripe::Checkout::Session.create({
                 line_items: line_items.flatten,
+                shipping_options: shipping_rate,
                 mode: 'payment',
                 success_url: submission_success_url(@submission.id) + "?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: submission_cancel_url(@submission.id)    
             })
             redirect_to session.url, status: 303, allow_other_host: true
-            # redirect_to @submission
         else
             flash[:alert] = @submission.errors.full_messages.join(' ')
             render :new, status: :unprocessable_entity

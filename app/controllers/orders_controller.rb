@@ -20,6 +20,9 @@ class OrdersController < ApplicationController
         if @order.save!
             session = Stripe::Checkout::Session.create({
                 line_items: line_items,
+                shipping_options: [{
+                    shipping_rate: Product.find_by(name: 'shipping').prices.first.stripe_key
+                }],
                 mode: 'payment',
                 success_url: order_success_url(@order.id) + "?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: order_cancel_url(@order.id)
