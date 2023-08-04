@@ -75,7 +75,7 @@ class SubmissionsController < ApplicationController
             redirect_to session.url, status: 303, allow_other_host: true
         else
             flash[:alert] = @submission.errors.full_messages.join(' ')
-            render :new, status: :unprocessable_entity
+            render :new
         end
     end
 
