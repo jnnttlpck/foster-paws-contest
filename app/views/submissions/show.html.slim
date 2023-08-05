@@ -9,7 +9,7 @@
                     h4 
                         | Age: 
                         == @submission.cat_age
-                    - if current_user.admin?
+                    - if current_user&.admin?
                         h5 Submitted by
                         div == [@submission.first_name, @submission.last_name].join(' ')
                         div == @submission.email
@@ -24,7 +24,7 @@
             p == simple_format(@submission.about)
         .col-md-8
             == image_tag @submission.file.variant(:small) if @submission.file.attached?
-            - if current_user.admin?
+            - if current_user&.admin?
                 div == link_to 'Download', rails_blob_path(@submission.file, disposition: "attachment")
 
         

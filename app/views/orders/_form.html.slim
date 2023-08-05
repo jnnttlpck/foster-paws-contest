@@ -1,6 +1,6 @@
 - Product.where.not(name: ['submission', 'donation', 'shipping']).all.each do |product|
     div
-        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :user_id, value: current_user&.id
         == f.fields_for :line_items, @order.line_items.build do |ff|
             - base_price = product.prices.find_by(transaction_fee: false)
             - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
