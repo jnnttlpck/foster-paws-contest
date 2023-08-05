@@ -6,7 +6,7 @@
                     - cache(submission) do
                         .submission-card
                             span.badge.text-bg-info.rounded-pill.id-number == submission.id
-                            = image_tag submission.file.variant(:small), class: 'image' if submission.file.attached?
+                            .img = image_tag submission.file.variant(:small), class: 'image' if submission.file.attached?
 
                             .info
                                 h4.card-title = submission.pet_name
