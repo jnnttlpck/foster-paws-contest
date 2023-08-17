@@ -1,6 +1,6 @@
 .flex-column.sm-gap.md-top-margin
   - if controller_name != 'sessions'
-    = link_to "Log in", new_session_path(resource_name)
+    = link_to "Already signed up? Log in", new_session_path(resource_name)
     br
   - if devise_mapping.registerable? && controller_name != 'registrations'
     = link_to "Sign up", new_registration_path(resource_name)
