@@ -88,6 +88,7 @@ class SubmissionsController < ApplicationController
 
     def cancel
         @submission = Submission.find(params[:submission_id])
+        @submission.destroy
     end
 
     def add_order
