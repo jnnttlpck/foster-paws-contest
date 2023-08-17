@@ -9,7 +9,7 @@ class Submission < ApplicationRecord
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :location, presence: true
-    validates :pet_name, presence: true, uniqueness: { scope: :user_id }
+    validates :pet_name, presence: true, uniqueness: { scope: :user_id, case_insensitive: true }
     validates :file, presence: true
     validates :email, presence: true, format: URI::MailTo::EMAIL_REGEXP
     validates :rules_and_conditions, acceptance: true
@@ -20,11 +20,17 @@ class Submission < ApplicationRecord
         expired: 2
     }
 
+    before_validation :stripe_whitespace
+
     accepts_nested_attributes_for :order
 
     delegate :email, to: :user
 
     private
+
+    def stripe_whitespace
+        self.pet_name = pet_name.strip
+    end
 
     def file_image_format
         return unless file.attached?
