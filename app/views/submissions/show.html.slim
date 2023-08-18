@@ -22,6 +22,8 @@
             p == simple_format(@submission.got_cat)
             h5 More about
             p == simple_format(@submission.about)
+            - if @submission.open?
+                == button_to 'Pay', pay_submission_path(@submission), class: 'btn btn-primary', data: { turbo: false }
         .col-md-8
             == image_tag @submission.file.variant(:small) if @submission.file.attached?
             - if current_user&.admin?

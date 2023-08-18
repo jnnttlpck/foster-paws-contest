@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
     invisible_captcha only: [:create], honeypot: :subtitle
-    before_action :authenticate_user!, only: [:new, :create]
-    before_action :set_stripe_vars, only: [:new, :create]
+    before_action :authenticate_user!, only: [:new, :create, :pay]
+    before_action :set_stripe_vars, only: [:new, :create, :pay]
     before_action lambda {
         resize_image_before_upload(submission_params[:file], 800, 800)
     }, only: [:create]
@@ -77,6 +77,35 @@ class SubmissionsController < ApplicationController
             flash[:alert] = @submission.errors.full_messages.join(' ')
             render :new
         end
+    end
+
+    def pay
+        @submission = Submission.find(params[:id])
+        line_items = []
+        shipping_rate = []
+        if (@order = @submission.order)
+            @submission.order.status = :open
+            @submission.order.user = current_user
+            line_items << @order.line_items.map do |li|
+                { price: li.price.stripe_key, quantity: li.quantity }
+            end
+            shipping_rate << {
+                shipping_rate: Product.find_by(name: 'shipping').prices.first.stripe_key
+            }
+        end
+        submission_price = @submission.cover_transaction_fee? ? @transaction_price : @base_price
+        line_items << {
+            price: submission_price.stripe_key,
+            quantity: 1
+        }
+        session = Stripe::Checkout::Session.create({
+            line_items: line_items.flatten,
+            shipping_options: shipping_rate,
+            mode: 'payment',
+            success_url: submission_success_url(@submission.id) + "?session_id={CHECKOUT_SESSION_ID}",
+            cancel_url: submission_cancel_url(@submission.id)    
+        })
+        redirect_to session.url, status: 303, allow_other_host: true
     end
 
     def success

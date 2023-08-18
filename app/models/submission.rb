@@ -11,7 +11,6 @@ class Submission < ApplicationRecord
     validates :location, presence: true
     validates :pet_name, presence: true, uniqueness: { scope: :user_id, case_insensitive: true }
     validates :file, presence: true
-    validates :email, presence: true, format: URI::MailTo::EMAIL_REGEXP
     validates :rules_and_conditions, acceptance: true
     validate :file_image_format
     enum status: {

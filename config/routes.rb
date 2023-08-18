@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post 'log_approvals', on: :collection
     get 'closed', on: :collection
     get 'my_submissions', on: :collection
+    post 'pay', on: :member
   end
   resources :orders do
     get 'success'
