@@ -1,0 +1,6 @@
+ = form_with model: @submission, data: { turbo: false } do |f|
+    h3 = @submission.pet_name
+    .form-group.lg-bottom-margin
+        = f.label :file, 'Upload Pic', class: 'form-label'
+        = f.file_field :file, class: 'form-control', required: true
+    = f.submit 'Save', class: 'btn btn-primary'

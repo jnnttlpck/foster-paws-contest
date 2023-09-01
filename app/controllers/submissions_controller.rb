@@ -27,9 +27,20 @@ class SubmissionsController < ApplicationController
 
     def new
         @submission = Submission.new
-        # if Date.today > Date.new(2023,8,31)
+        # if (Time.now - 4.hours) > Time.new(2023,9,1)
         #     redirect_to closed_submissions_path
         # end
+    end
+
+    def edit
+        @submission = Submission.find(params[:id])
+    end
+
+    def update
+        @submission = Submission.find(params[:id])
+        @submission.attributes = submission_params
+        @submission.save
+        redirect_to @submission
     end
 
     def closed
