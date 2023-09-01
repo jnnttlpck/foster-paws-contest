@@ -26,10 +26,10 @@ class SubmissionsController < ApplicationController
     end
 
     def new
-        @submission = Submission.new
+        # @submission = Submission.new
         # if (Time.now - 4.hours) > Time.new(2023,9,1)
-        #     redirect_to closed_submissions_path
         # end
+        redirect_to closed_submissions_path
     end
 
     def edit
