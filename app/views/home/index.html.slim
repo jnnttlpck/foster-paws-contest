@@ -5,20 +5,22 @@
             == image_tag('catandSC2.png', class: 'img-fluid')
 
         .col-md-6.col-sm-12
-            h1.text-primary Enter your cutest cat pic!
-            h5.text-primary Enter as many cats as you like.
-            h5.text-primary One submission per cat please. 
-            h5.text-primary Winners will be featured in the Foster Paws 2024 calendar.
-            h5.text-primary Deadline is August 31st, 2023.
-            h5.text-primary Submissions are $5 each.
-            h5.text-primary All submissions benefit Foster Paws Rescue.
+            h1.text-primary Submissions are closed but you can still order your calendar!
+            h5.text-primary Thanks to everyone who entered!
+            / h1.text-primary Enter your cutest cat pic!
+            / h5.text-primary Enter as many cats as you like.
+            / h5.text-primary One submission per cat please. 
+            / h5.text-primary Winners will be featured in the Foster Paws 2024 calendar.
+            / h5.text-primary Deadline is August 31st, 2023.
+            / h5.text-primary Submissions are $5 each.
+            / h5.text-primary All submissions benefit Foster Paws Rescue.
             .flex-row.md-gap.lg-top-margin
-                == link_to new_submission_path, class: 'btn btn-primary btn-lg' do
-                    == fa_icon 'camera', class: 'xs-right-margin'
-                    | Submit your kitty
+                / == link_to new_submission_path, class: 'btn btn-primary btn-lg' do
+                /     == fa_icon 'camera', class: 'xs-right-margin'
+                /     | Submit your kitty
                 == link_to new_order_path, class: 'btn btn-secondary btn-lg' do 
                     == fa_icon 'calendar', class: 'xs-right-margin'
-                    | Pre-Order Calendar
+                    | Order 2024 Calendar
     .row
         .col-md-12.md-top-margin
             .foster-paws-box.flex-row.space-around.align-center
