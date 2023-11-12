@@ -1,52 +1,32 @@
 - Product.where.not(name: ['submission', 'donation', 'shipping']).all.each do |product|
-    = f.hidden_field :user_id, value: current_user&.id
-    == f.fields_for :line_items, @order.line_items.build do |ff|
-        - base_price = product.prices.find_by(transaction_fee: false)
-        - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
-        - shipping_rate = Stripe::ShippingRate.retrieve(Product.find_by(name: 'shipping').prices.first.stripe_key).fixed_amount[:amount]
-        == ff.hidden_field :price_id, value: base_price.id
-        h4 == product.name.titleize
-        h5.md-bottom-margin == "$#{sprintf('%.2f', stripe_price.to_f/100)} ($#{sprintf('%.2f', shipping_rate.to_f/100)} s/h)"
-        .col-md-3.md-bottom-margin
-            .form-group
-                == ff.label :quantity
-                = ff.number_field :quantity, min: 1, class: 'form-control', required: true
-.row
-    .col-md-6.lg-bottom-margin
+    div
+        = f.hidden_field :user_id, value: current_user&.id
+        == f.fields_for :line_items, @order.line_items.build do |ff|
+            - base_price = product.prices.find_by(transaction_fee: false)
+            - stripe_price = Stripe::Price.retrieve(base_price.stripe_key).unit_amount
+            - shipping_rate = Stripe::ShippingRate.retrieve(Product.find_by(name: 'shipping').prices.first.stripe_key).fixed_amount[:amount]
+            == ff.hidden_field :price_id, value: base_price.id
+            h4 == product.name.titleize
+            h5 == "$#{sprintf('%.2f', stripe_price.to_f/100)} ($#{sprintf('%.2f', shipping_rate.to_f/100)} s/h)"
+            == ff.label :quantity
+            = ff.number_field :quantity, min: 1, class: 'form-control', required: true
+        h4 Ship to 
         .form-group.form-floating
             = f.text_field :name, required: true, class: 'form-control'
             = f.label :name
-.row
-    h4 Delivery Option
-    .col-md-6
-        = f.label :delivery_option, value: :pickup_laurens_rd, class: 'radio-inline' do 
-            => f.radio_button :delivery_option, :pickup_laurens_rd
-            | Pick up at adoption event - Lauren's Rd Petsmart
-        = f.label :delivery_option, value: :pickup_taylors, class: 'radio-inline' do 
-            => f.radio_button :delivery_option, :pickup_taylors
-            | Pick up at adoption event - Taylors Petsmart
-        = f.label :delivery_option, value: :pickup_spartanburg, class: 'radio-inline' do 
-            => f.radio_button :delivery_option, :pickup_spartanburg
-            | Pick up at adoption event - Spartanburg Petsmart
-    .col-md-6
-        = f.label :delivery_option, value: :ship, class: 'radio-inline' do 
-            => f.radio_button :delivery_option, :ship
-            | Ship to me
-        h4.md-top-margin Ship to 
-
         .form-group.form-floating
-            = f.text_field :line_1, class: 'form-control'
+            = f.text_field :line_1, required: true, class: 'form-control'
             = f.label :line_1, 'Street'
         .form-group.form-floating
             = f.text_field :line_2, class: 'form-control'
             = f.label :line_2, 'Apt #, etc'
         .form-group.form-floating
-            = f.text_field :city, class: 'form-control'
+            = f.text_field :city, required: true, class: 'form-control'
             = f.label :city
         .form-group.form-floating
-            = f.select :state, CS.states(:us).keys, {include_blank: 'Nothing Selected'}, class: 'form-select'
+            = f.select :state, CS.states(:us).keys, {}, required: true, class: 'form-select'
             = f.label :state
         .form-group.form-floating
-            = f.text_field :zip, class: 'form-control'
+            = f.text_field :zip, required: true, class: 'form-control'
             = f.label :zip
             

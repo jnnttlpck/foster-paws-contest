@@ -1,9 +1,10 @@
-.container.lg-top-margin.lg-bottom-margin
+.container.lg-top-margin 
     .row
-        = form_with model: @order, data: { turbo: false } do |f|
-            = f.invisible_captcha :subtitle
-            .form-group.col-md-12
-                == render partial: 'form', locals: { f: f }
+        .col-md-6
+            = form_with model: @order, data: { turbo: false } do |f|
+                = f.invisible_captcha :subtitle
+                .form-group
+                    == render partial: 'form', locals: { f: f }
 
-            .form-group
-                = f.submit 'Order', class: 'btn btn-primary'
+                .form-group
+                    = f.submit 'Order', class: 'btn btn-primary'

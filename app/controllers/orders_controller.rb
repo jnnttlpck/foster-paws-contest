@@ -17,20 +17,18 @@ class OrdersController < ApplicationController
         line_items = @order.line_items.map do |li|
             { price: li.price.stripe_key, quantity: li.quantity }
         end
-        shipping_options = @order.ship? ? [{
-            shipping_rate: Product.find_by(name: 'shipping').prices.first.stripe_key
-        }] : []
-        if @order.save
+        if @order.save!
             session = Stripe::Checkout::Session.create({
                 line_items: line_items,
-                shipping_options: shipping_options,
+                shipping_options: [{
+                    shipping_rate: Product.find_by(name: 'shipping').prices.first.stripe_key
+                }],
                 mode: 'payment',
                 success_url: order_success_url(@order.id) + "?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url: order_cancel_url(@order.id)
             })
             redirect_to session.url, status: 303, allow_other_host: true
         else 
-            flash[:alert] = @order.errors.full_messages.join(' ')
             render :new
         end
     end
@@ -47,7 +45,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.require(:order).permit(:user_id, :name, :line_1, :line_2, :city, :state, :zip, :delivery_option, line_items_attributes: [:id, :quantity, :price_id, :cover_transaction_fee])
+        params.require(:order).permit(:user_id, :name, :line_1, :line_2, :city, :state, :zip, line_items_attributes: [:id, :quantity, :price_id, :cover_transaction_fee])
     end
 
 end
