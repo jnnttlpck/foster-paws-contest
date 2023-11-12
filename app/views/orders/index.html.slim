@@ -16,7 +16,10 @@
                     - @orders.each do |order|
                         tr 
                             td == order.name
-                            td == order.line_1 
+                            - if order.ship?
+                                td == order.line_1 
+                            - else
+                                td == t("orders.delivery_options.#{order.delivery_option}")
                             td == order.line_2 
                             td == order.city 
                             td == order.state 
