@@ -28,7 +28,8 @@ class OrdersController < ApplicationController
                 shipping_options: shipping_options,
                 mode: 'payment',
                 success_url: order_success_url(@order.id) + "?session_id={CHECKOUT_SESSION_ID}",
-                cancel_url: order_cancel_url(@order.id)
+                cancel_url: order_cancel_url(@order.id),
+                allow_promotion_codes: true
             })
             redirect_to session.url, status: 303, allow_other_host: true
         else 
