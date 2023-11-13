@@ -1,3 +1,5 @@
+require 'csv'
+
 class OrdersController < ApplicationController
     invisible_captcha only: [:create], honeypot: :subtitle
     before_action :authenticate_user!, only: [:new, :create]
@@ -42,6 +44,16 @@ class OrdersController < ApplicationController
     end
 
     def cancel
+    end
+
+    def export
+        @orders = Order.where(status: :complete).where.not(delivery_option: :ship)
+        respond_to do |format|
+            format.csv do
+                response.headers['Content-Type'] = 'text/csv'
+                response.headers['Content-Disposition'] = "attachment; filname=orders.csv"
+            end
+        end
     end
 
     private

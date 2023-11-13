@@ -1,0 +1,5 @@
+<%- headers = ['Name', 'Pickup location', 'Quantity'] -%>
+<%= CSV.generate_line headers %>
+<%- @orders.each do |order| -%>
+    <%= CSV.generate_line([order.name, t("orders.delivery_options.#{order.delivery_option}"), order.line_items.first.quantity]) -%>
+<%- end -%>

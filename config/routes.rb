@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :orders do
     get 'success'
     get 'cancel'
+    get 'export', on: :collection
   end
   resources :donations, only: [:create] do
     get 'success', on: :collection

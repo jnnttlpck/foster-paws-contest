@@ -33,7 +33,7 @@ en:
   hello: "Hello world"
   orders:
     delivery_options:
-      pickup_laurens_rd: "Pick up at Adoption Event - Lauren's Rd Petsmart"
+      pickup_laurens_rd: "Pick up at Adoption Event - Laurens Rd Petsmart"
       pickup_taylors: "Pick up at Adoption Event - Taylors Petsmart"
       pickup_spartanburg: "Pick up at Adoption Event - Spartanburg Petsmart"
 
